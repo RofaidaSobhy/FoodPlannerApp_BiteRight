@@ -1,4 +1,4 @@
-package com.example.biteright.network;
+package com.example.biteright.home.network;
 
 
 import com.example.biteright.model.Root;

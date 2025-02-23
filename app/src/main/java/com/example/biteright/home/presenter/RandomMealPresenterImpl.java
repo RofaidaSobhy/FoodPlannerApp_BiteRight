@@ -2,15 +2,15 @@ package com.example.biteright.home.presenter;
 
 import com.example.biteright.home.view.RandomMealView;
 import com.example.biteright.model.Meal;
-import com.example.biteright.model.MealsRepository;
+import com.example.biteright.home.model.RandomMealRepository;
 import com.example.biteright.network.NetworkCallback;
 
 public class RandomMealPresenterImpl implements RandomMealPresenter, NetworkCallback {
 
     private RandomMealView _view;
-    private MealsRepository _repo;
+    private RandomMealRepository _repo;
 
-    public RandomMealPresenterImpl(RandomMealView view, MealsRepository repo){
+    public RandomMealPresenterImpl(RandomMealView view, RandomMealRepository repo){
         _view =view;
         _repo = repo;
     }

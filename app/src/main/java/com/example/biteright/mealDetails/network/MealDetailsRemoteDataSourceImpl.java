@@ -1,36 +1,38 @@
-package com.example.biteright.network;
+package com.example.biteright.mealDetails.network;
 
 import android.util.Log;
 
 import com.example.biteright.model.Root;
+import com.example.biteright.network.NetworkCallback;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RandomMealRemoteDataSourceImpl implements RandomMealRemoteDataSource {
+public class MealDetailsRemoteDataSourceImpl implements MealDetailsRemoteDataSource {
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
-    private static final String TAG = "RandomMealRemoteDataSou";
-    RandomMealService randomMealService;
-    private static RandomMealRemoteDataSourceImpl client=null;
-    private RandomMealRemoteDataSourceImpl(){
+    private static final String TAG = "MealDetailsRemoteDataSo";
+    MealDetailsService mealDetailsService;
+    private static MealDetailsRemoteDataSourceImpl client=null;
+    private MealDetailsRemoteDataSourceImpl(){
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL).build();
 
-        randomMealService = retrofit.create(RandomMealService.class);
+        mealDetailsService = retrofit.create(MealDetailsService.class);
     }
 
-    public static RandomMealRemoteDataSourceImpl getInstance(){
+    public static MealDetailsRemoteDataSourceImpl getInstance(){
         if(client == null){
-            client=new RandomMealRemoteDataSourceImpl();
+            client=new MealDetailsRemoteDataSourceImpl();
         }
         return client;
     }
     @Override
-    public void makeNetworkCall(NetworkCallback networkCallback){
-        Call<Root> call = randomMealService.getRoot();
+    public void makeNetworkCall(NetworkCallback networkCallback , String mealId){
+        Call<Root> call = mealDetailsService.getRoot(mealId);
 
         call.enqueue(new Callback<Root>() {
             @Override

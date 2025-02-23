@@ -19,8 +19,8 @@ import com.example.biteright.R;
 import com.example.biteright.home.presenter.RandomMealPresenter;
 import com.example.biteright.home.presenter.RandomMealPresenterImpl;
 import com.example.biteright.model.Meal;
-import com.example.biteright.model.MealsRepositoryImpl;
-import com.example.biteright.network.RandomMealRemoteDataSourceImpl;
+import com.example.biteright.home.model.RandomMealRepositoryImpl;
+import com.example.biteright.home.network.RandomMealRemoteDataSourceImpl;
 
 public class HomeFragment extends Fragment implements RandomMealView {
 
@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment implements RandomMealView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         randomMealPresenter = new RandomMealPresenterImpl(this,
-                MealsRepositoryImpl.getInstance(RandomMealRemoteDataSourceImpl.getInstance()));
+                RandomMealRepositoryImpl.getInstance(RandomMealRemoteDataSourceImpl.getInstance()));
 
         randomMealPresenter.getRandomMeal();
 

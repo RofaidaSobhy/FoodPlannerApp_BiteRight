@@ -1,6 +1,7 @@
-package com.example.biteright.model;
+package com.example.biteright.home.model;
 import com.example.biteright.network.NetworkCallback;
 
-public interface MealsRepository {
+public interface RandomMealRepository {
     void getRandomMeal(NetworkCallback networkCallback);
+
 }
