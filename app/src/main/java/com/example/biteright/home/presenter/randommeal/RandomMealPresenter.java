@@ -1,4 +1,4 @@
-package com.example.biteright.home.presenter;
+package com.example.biteright.home.presenter.randommeal;
 
 
 public interface RandomMealPresenter {

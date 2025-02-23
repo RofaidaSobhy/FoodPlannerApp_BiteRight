@@ -1,4 +1,4 @@
-package com.example.biteright.home.view;
+package com.example.biteright.home.view.randommeal;
 
 import com.example.biteright.model.Meal;
 

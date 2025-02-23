@@ -16,13 +16,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.biteright.R;
-import com.example.biteright.home.presenter.RandomMealPresenter;
-import com.example.biteright.home.presenter.RandomMealPresenterImpl;
+import com.example.biteright.home.model.suggestedmeals.SuggestedMealsRepositoryImpl;
+import com.example.biteright.home.network.suggestedmeals.SuggestedMealsRemoteDataSourceImpl;
+import com.example.biteright.home.presenter.randommeal.RandomMealPresenter;
+import com.example.biteright.home.presenter.randommeal.RandomMealPresenterImpl;
+import com.example.biteright.home.presenter.suggestedmeals.SuggestedMealsPresenter;
+import com.example.biteright.home.presenter.suggestedmeals.SuggestedMealsPresenterImpl;
+import com.example.biteright.home.view.randommeal.RandomMealView;
+import com.example.biteright.home.view.suggestedmeals.SuggestedMealsView;
 import com.example.biteright.model.Meal;
-import com.example.biteright.home.model.RandomMealRepositoryImpl;
-import com.example.biteright.home.network.RandomMealRemoteDataSourceImpl;
+import com.example.biteright.home.model.randommeal.RandomMealRepositoryImpl;
+import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSourceImpl;
 
-public class HomeFragment extends Fragment implements RandomMealView {
+public class HomeFragment extends Fragment implements RandomMealView, SuggestedMealsView {
 
 
     private TextView txt_from_home_to_plan;
@@ -32,6 +38,8 @@ public class HomeFragment extends Fragment implements RandomMealView {
     private TextView txt_from_home_to_notification;
 
     RandomMealPresenter randomMealPresenter;
+    SuggestedMealsPresenter suggestedMealsPresenter;
+
 
 
     public HomeFragment() {
@@ -44,9 +52,18 @@ public class HomeFragment extends Fragment implements RandomMealView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         randomMealPresenter = new RandomMealPresenterImpl(this,
-                RandomMealRepositoryImpl.getInstance(RandomMealRemoteDataSourceImpl.getInstance()));
+                RandomMealRepositoryImpl.getInstance(
+                        RandomMealRemoteDataSourceImpl.getInstance()
+                ));
 
         randomMealPresenter.getRandomMeal();
+
+        suggestedMealsPresenter = new SuggestedMealsPresenterImpl(this,
+                SuggestedMealsRepositoryImpl.getInstance(
+                        SuggestedMealsRemoteDataSourceImpl.getInstance()
+                ));
+
+        suggestedMealsPresenter.getSuggestedMeals();
 
     }
 
@@ -100,6 +117,12 @@ public class HomeFragment extends Fragment implements RandomMealView {
     public void showRandomMeal(Meal[] meals) {
         Log.i("TAG", "showRandomMeal: "+meals[0].getStrArea());
         Toast.makeText(getContext(),meals[0].getIdMeal(),Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showSuggestedMeals(Meal[] meals) {
+        Log.i("TAG", "showSuggestedMeals: "+meals[0].getStrArea());
+        Toast.makeText(getContext(),meals.length+"",Toast.LENGTH_LONG).show();
     }
 
     @Override

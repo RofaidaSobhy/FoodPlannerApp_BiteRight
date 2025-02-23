@@ -1,6 +1,6 @@
-package com.example.biteright.home.model;
+package com.example.biteright.home.model.randommeal;
 import com.example.biteright.network.NetworkCallback;
-import com.example.biteright.home.network.RandomMealRemoteDataSource;
+import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSource;
 
 public class RandomMealRepositoryImpl implements RandomMealRepository {
     RandomMealRemoteDataSource randomMealRemoteDataSource;

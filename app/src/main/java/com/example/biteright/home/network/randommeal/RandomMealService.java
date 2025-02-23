@@ -1,4 +1,4 @@
-package com.example.biteright.home.network;
+package com.example.biteright.home.network.randommeal;
 
 
 import com.example.biteright.model.Root;

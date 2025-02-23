@@ -1,8 +1,8 @@
-package com.example.biteright.home.presenter;
+package com.example.biteright.home.presenter.randommeal;
 
-import com.example.biteright.home.view.RandomMealView;
+import com.example.biteright.home.view.randommeal.RandomMealView;
 import com.example.biteright.model.Meal;
-import com.example.biteright.home.model.RandomMealRepository;
+import com.example.biteright.home.model.randommeal.RandomMealRepository;
 import com.example.biteright.network.NetworkCallback;
 
 public class RandomMealPresenterImpl implements RandomMealPresenter, NetworkCallback {
