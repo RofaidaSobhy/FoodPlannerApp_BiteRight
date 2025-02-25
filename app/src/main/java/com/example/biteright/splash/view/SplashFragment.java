@@ -27,6 +27,8 @@ public class SplashFragment extends Fragment {
     private TextView txt_slogan;
     private com.airbnb.lottie.LottieAnimationView lottieAnimationView;
 
+    private Handler handler;
+
     public SplashFragment() {
         // Required empty public constructor
     }
@@ -38,9 +40,7 @@ public class SplashFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
+        handler= new Handler();
 
     }
 
@@ -69,7 +69,7 @@ public class SplashFragment extends Fragment {
 
     private void startEatingSound(){
 
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 eating_sound = MediaPlayer.create(getContext(), R.raw.eatingcookiessound);
@@ -83,7 +83,7 @@ public class SplashFragment extends Fragment {
 
 
     private void navigateToNextScreen(View view){
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_welcomeFragment);
@@ -94,7 +94,7 @@ public class SplashFragment extends Fragment {
     private void convertLottieWithLogo() {
 
 
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
@@ -113,6 +113,22 @@ public class SplashFragment extends Fragment {
                 txt_slogan.startAnimation(fadeIn);
             }
         },4000);
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+
+        if (eating_sound != null) {
+            eating_sound.stop();
+            eating_sound.release();
+            eating_sound = null;
+        }
+
+
+        handler.removeCallbacksAndMessages(null);
     }
 
 }
