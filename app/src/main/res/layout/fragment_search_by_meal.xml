@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".search.view.SearchByMealFragment">
+    tools:context=".search.view.SearchByMealFragment"
+    android:background="@color/WhiteBeige">
 
     <TextView
         android:id="@+id/txt_search_by_meal"

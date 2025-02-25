@@ -50,4 +50,6 @@ dependencies {
     annotationProcessor ("androidx.room:room-compiler:2.6.1")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.google.android.material:material:1.12.0")
+
+    implementation("com.airbnb.android:lottie:6.6.2")
 }
