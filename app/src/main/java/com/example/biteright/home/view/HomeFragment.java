@@ -7,14 +7,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.biteright.R;
 import com.example.biteright.home.model.suggestedmeals.SuggestedMealsRepositoryImpl;
 import com.example.biteright.home.network.suggestedmeals.SuggestedMealsRemoteDataSourceImpl;
@@ -23,12 +28,14 @@ import com.example.biteright.home.presenter.randommeal.RandomMealPresenterImpl;
 import com.example.biteright.home.presenter.suggestedmeals.SuggestedMealsPresenter;
 import com.example.biteright.home.presenter.suggestedmeals.SuggestedMealsPresenterImpl;
 import com.example.biteright.home.view.randommeal.RandomMealView;
+import com.example.biteright.home.view.suggestedmeals.OnMealClickListener;
+import com.example.biteright.home.view.suggestedmeals.SuggestedMealsAdapter;
 import com.example.biteright.home.view.suggestedmeals.SuggestedMealsView;
 import com.example.biteright.model.Meal;
 import com.example.biteright.home.model.randommeal.RandomMealRepositoryImpl;
 import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSourceImpl;
 
-public class HomeFragment extends Fragment implements RandomMealView, SuggestedMealsView {
+public class HomeFragment extends Fragment implements RandomMealView {
 
 
     private TextView txt_from_home_to_plan;
@@ -37,8 +44,15 @@ public class HomeFragment extends Fragment implements RandomMealView, SuggestedM
     private TextView txt_from_home_to_search;
     private TextView txt_from_home_to_notification;
 
-    RandomMealPresenter randomMealPresenter;
-    SuggestedMealsPresenter suggestedMealsPresenter;
+    private ImageView randomMeal_image;
+    private TextView randomMeal_name;
+    private TextView randomMeal_description;
+    private TextView randomMeal_area;
+
+
+
+
+    private RandomMealPresenter randomMealPresenter;
 
 
 
@@ -51,6 +65,10 @@ public class HomeFragment extends Fragment implements RandomMealView, SuggestedM
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         randomMealPresenter = new RandomMealPresenterImpl(this,
                 RandomMealRepositoryImpl.getInstance(
                         RandomMealRemoteDataSourceImpl.getInstance()
@@ -58,12 +76,7 @@ public class HomeFragment extends Fragment implements RandomMealView, SuggestedM
 
         randomMealPresenter.getRandomMeal();
 
-        suggestedMealsPresenter = new SuggestedMealsPresenterImpl(this,
-                SuggestedMealsRepositoryImpl.getInstance(
-                        SuggestedMealsRemoteDataSourceImpl.getInstance()
-                ));
 
-        suggestedMealsPresenter.getSuggestedMeals();
 
     }
 
@@ -79,7 +92,9 @@ public class HomeFragment extends Fragment implements RandomMealView, SuggestedM
         super.onViewCreated(view, savedInstanceState);
 
         initUI(view);
+
         onClickListener(view);
+
 
     }
 
@@ -89,7 +104,15 @@ public class HomeFragment extends Fragment implements RandomMealView, SuggestedM
         txt_from_home_to_search=view.findViewById(R.id.txt_from_home_to_search);
         txt_from_home_to_profile=view.findViewById(R.id.txt_from_home_to_profile);
         txt_from_home_to_notification=view.findViewById(R.id.txt_from_home_to_notification);
+
+        randomMeal_image = view.findViewById(R.id.randomMeal_image);
+        randomMeal_name = view.findViewById(R.id.randomMeal_name);
+        randomMeal_description = view.findViewById(R.id.randomMeal_description);
+        randomMeal_area = view.findViewById(R.id.randomMeal_area);
+
+
     }
+
 
     private void onClickListener(View view){
         txt_from_home_to_plan.setOnClickListener(
@@ -117,13 +140,22 @@ public class HomeFragment extends Fragment implements RandomMealView, SuggestedM
     public void showRandomMeal(Meal[] meals) {
         Log.i("TAG", "showRandomMeal: "+meals[0].getStrArea());
         Toast.makeText(getContext(),meals[0].getIdMeal(),Toast.LENGTH_LONG).show();
+
+        Glide.with(this).load(meals[0].getStrMealThumb())
+                .apply(new RequestOptions()
+                    .override(350, 150)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_foreground)
+                    .centerCrop())
+                .into(randomMeal_image);
+
+        randomMeal_name.setText(meals[0].getStrMeal());
+        randomMeal_area.setText(meals[0].getStrArea());
+        randomMeal_description.setText(meals[0].getStrInstructions().substring(0,meals[0].getStrInstructions().length()-1) );
+
     }
 
-    @Override
-    public void showSuggestedMeals(Meal[] meals) {
-        Log.i("TAG", "showSuggestedMeals: "+meals[0].getStrArea());
-        Toast.makeText(getContext(),meals.length+"",Toast.LENGTH_LONG).show();
-    }
+
 
     @Override
     public void showErrMsg(String error) {
@@ -132,4 +164,5 @@ public class HomeFragment extends Fragment implements RandomMealView, SuggestedM
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
 }

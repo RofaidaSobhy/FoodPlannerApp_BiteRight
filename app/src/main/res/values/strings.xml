@@ -2,4 +2,6 @@
     <string name="app_name">BiteRight</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="SuggestedMeal">Suggested Meal</string>
+    <string name="ThreeDots">" ..."</string>
 </resources>

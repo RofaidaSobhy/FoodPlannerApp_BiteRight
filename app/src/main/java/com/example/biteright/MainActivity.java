@@ -45,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 if(navDestination.getId()==R.id.splashFragment || navDestination.getId()==R.id.welcomeFragment){
                     getSupportActionBar().hide();
                 }else if(navDestination.getId()==R.id.homeFragment){
-                    getSupportActionBar().show();
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    //getSupportActionBar().show();
+                    //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    getSupportActionBar().hide();
                 }else{
                     getSupportActionBar().show();
                 }

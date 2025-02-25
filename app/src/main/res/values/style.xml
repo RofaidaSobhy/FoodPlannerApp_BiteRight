@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="RoundedRectangle">
+        <item name="cornerSize">20%</item>
+    </style>
+    <style name="BottomRoundedRectangle">
+        <item name="cornerSizeBottomLeft">14dp</item>
+        <item name="cornerSizeBottomRight">14dp</item>
+    </style>
 </resources>
