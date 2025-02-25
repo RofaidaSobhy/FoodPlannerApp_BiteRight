@@ -18,7 +18,8 @@ import com.example.biteright.R;
 public class LoginFragment extends Fragment {
 
 
-    private TextView txt_login;
+
+    private TextView txt_doNotHaveAnAccount;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -47,12 +48,13 @@ public class LoginFragment extends Fragment {
     }
 
     private void initUI(View view){
-        txt_login=view.findViewById(R.id.txt_login);
+
+        txt_doNotHaveAnAccount = view.findViewById(R.id.alreadyHaveAnAccount);
 
     }
 
     private void onClickListener(View view){
-        txt_login.setOnClickListener(
+        txt_doNotHaveAnAccount.setOnClickListener(
                 v -> Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registrationFragment)
         );
     }

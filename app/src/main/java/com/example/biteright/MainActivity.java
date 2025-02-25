@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                if(navDestination.getId()==R.id.splashFragment || navDestination.getId()==R.id.welcomeFragment){
+                if(navDestination.getId()==R.id.splashFragment || navDestination.getId()==R.id.welcomeFragment ||navDestination.getId()==R.id.loginFragment||navDestination.getId()==R.id.registrationFragment){
                     getSupportActionBar().hide();
                 }else if(navDestination.getId()==R.id.homeFragment){
                     //getSupportActionBar().show();

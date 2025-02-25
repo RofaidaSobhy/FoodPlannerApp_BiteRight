@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.biteright.R;
@@ -19,7 +20,7 @@ public class RegistrationFragment extends Fragment {
 
 
 
-    private TextView txt_registration;
+    private Button btn_SignUp;
     public RegistrationFragment() {
         // Required empty public constructor
     }
@@ -49,12 +50,12 @@ public class RegistrationFragment extends Fragment {
     }
 
     private void initUI(View view){
-        txt_registration=view.findViewById(R.id.txt_registration);
+        btn_SignUp = view.findViewById(R.id.btn_SignUp);
 
     }
 
     private void onClickListener(View view){
-        txt_registration.setOnClickListener(
+        btn_SignUp.setOnClickListener(
                 v -> Navigation.findNavController(view).navigate(R.id.action_registrationFragment_to_homeFragment)
         );
     }

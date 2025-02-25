@@ -13,11 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BiteRight"
         tools:targetApi="31">
-        <activity
-            android:name=".authentication.Login"
-            android:exported="false" >
 
-        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
