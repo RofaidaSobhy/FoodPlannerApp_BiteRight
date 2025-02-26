@@ -20,7 +20,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/constraintLayout_Registration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -145,7 +145,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editText_Registration_Confirm_Password" />
 
         <ImageView
-            android:id="@+id/imageView3_Login"
+            android:id="@+id/imageView3_Registration"
             android:layout_width="30dp"
             android:layout_height="25dp"
             android:layout_marginTop="15dp"
@@ -234,7 +234,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView7_Registration" />
 
         <ImageView
-            android:id="@+id/imageView4_Login"
+            android:id="@+id/imageView4_Registration"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="16dp"

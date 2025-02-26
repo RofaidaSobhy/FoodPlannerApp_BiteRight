@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "376307263017",
+    "project_id": "rofaidaso",
+    "storage_bucket": "rofaidaso.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376307263017:android:8a1518d9675753de9b1e38",
+        "android_client_info": {
+          "package_name": "com.example.biteright"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7vcI4IiOBvZsyE1aJYhl21O5FPYEcMu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

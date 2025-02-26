@@ -10,6 +10,8 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.biteright.R;
@@ -19,7 +21,14 @@ public class LoginFragment extends Fragment {
 
 
 
-    private TextView txt_doNotHaveAnAccount;
+
+    private EditText email;
+    private EditText password;
+    private Button signIn;
+    private Button signInWithGoogle;
+    private TextView signUp;
+    private Button skip;
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -48,13 +57,17 @@ public class LoginFragment extends Fragment {
     }
 
     private void initUI(View view){
-
-        txt_doNotHaveAnAccount = view.findViewById(R.id.alreadyHaveAnAccount);
+        email = view.findViewById(R.id.editText_Login_Email);
+        password = view.findViewById(R.id.editText_Login_Password);
+        signIn = view.findViewById(R.id.btn_SignIn);
+        signUp = view.findViewById(R.id.doNotHaveAnAccount);
+        signInWithGoogle = view.findViewById(R.id.btn_SignIn_With_Google);
+        skip = view.findViewById(R.id.btn_skip_Login);
 
     }
 
     private void onClickListener(View view){
-        txt_doNotHaveAnAccount.setOnClickListener(
+        signUp.setOnClickListener(
                 v -> Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registrationFragment)
         );
     }
