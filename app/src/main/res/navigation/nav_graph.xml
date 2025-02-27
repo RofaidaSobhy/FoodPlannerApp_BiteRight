@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.biteright.splash.view.WelcomeFragment"
-        android:label="fragment_welcome"
+        android:label="Welcome"
         tools:layout="@layout/fragment_welcome" >
         <action
             android:id="@+id/action_welcomeFragment_to_loginFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.biteright.authentication.view.LoginFragment"
-        android:label="fragment_login"
+        android:label="Login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
@@ -42,16 +42,19 @@
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.biteright.authentication.view.RegistrationFragment"
-        android:label="fragment_registration"
+        android:label="Registration"
         tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/action_registrationFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.biteright.home.view.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_recipeFragment"
@@ -75,7 +78,7 @@
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.example.biteright.mealDetails.view.RecipeFragment"
-        android:label="fragment_recipe"
+        android:label="Recipe"
         tools:layout="@layout/fragment_recipe" />
     <fragment
         android:id="@+id/searchFragment"
@@ -89,7 +92,7 @@
     <fragment
         android:id="@+id/searchByMealFragment"
         android:name="com.example.biteright.search.view.SearchByMealFragment"
-        android:label="fragment_search_by_meal"
+        android:label="Search by Meal"
         tools:layout="@layout/fragment_search_by_meal" >
         <action
             android:id="@+id/action_searchByMealFragment_to_recipeFragment"
@@ -98,7 +101,7 @@
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.example.biteright.favorites.view.FavoriteFragment"
-        android:label="fragment_favourite"
+        android:label="Favorite"
         tools:layout="@layout/fragment_favourite" >
         <action
             android:id="@+id/action_favouriteFragment_to_recipeFragment"
@@ -107,7 +110,7 @@
     <fragment
         android:id="@+id/planFragment"
         android:name="com.example.biteright.planMeal.view.PlanFragment"
-        android:label="fragment_plan"
+        android:label="Plan"
         tools:layout="@layout/fragment_plan" >
         <action
             android:id="@+id/action_planFragment_to_recipeFragment"
@@ -116,11 +119,11 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.biteright.profile.view.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.example.biteright.notification.view.NotificationFragment"
-        android:label="fragment_notification"
+        android:label="Notification"
         tools:layout="@layout/fragment_notification" />
 </navigation>

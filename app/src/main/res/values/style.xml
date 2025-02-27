@@ -2,10 +2,16 @@
 <resources>
 
     <style name="RoundedRectangle">
-        <item name="cornerSize">20%</item>
+        <item name="cornerSize">20dp</item>
     </style>
     <style name="BottomRoundedRectangle">
         <item name="cornerSizeBottomLeft">14dp</item>
         <item name="cornerSizeBottomRight">14dp</item>
     </style>
+
+    <style name="RoundedDetailsImage">
+        <item name="cornerSize">10dp</item>
+    </style>
+
+
 </resources>

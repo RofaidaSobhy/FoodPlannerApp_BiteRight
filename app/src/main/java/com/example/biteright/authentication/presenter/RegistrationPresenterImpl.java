@@ -63,17 +63,17 @@ public class RegistrationPresenterImpl implements RegistrationPresenter{
 
     private boolean checkRegistrationDataValidation(String email, String password, String confirmPassword){
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            _view.validateEmail(false, "Invalid Email");
+            _view.validateEmail("Invalid Email");
             return false;
         }
 
         if(password.length()<6){
-            _view.validatePassword(false, "Password length should be greater than 6 digits");
+            _view.validatePassword("Password length should be greater than 6 digits");
             return false;
         }
 
         if(!password.equals(confirmPassword)){
-            _view.validateConfirmPassword(false,"Password not matched");
+            _view.validateConfirmPassword("Password not matched");
         }
 
         return true;

@@ -46,7 +46,6 @@ public class RegistrationFragment extends Fragment implements RegistrationView {
     private EditText password;
     private EditText confirmPassword;
     private Button signUp;
-    private Button signUpWithGoogle;
     private TextView signIn;
     private Button skip;
 
@@ -93,7 +92,6 @@ public class RegistrationFragment extends Fragment implements RegistrationView {
         password = view.findViewById(R.id.editText_Registration_Password);
         confirmPassword = view.findViewById(R.id.editText_Registration_Confirm_Password);
         signIn = view.findViewById(R.id.alreadyHaveAnAccount);
-        signUpWithGoogle = view.findViewById(R.id.btn_SignUp_With_Google);
         skip = view.findViewById(R.id.btn_skip_Registration);
         signUp = view.findViewById(R.id.btn_SignUp);
 
@@ -101,19 +99,37 @@ public class RegistrationFragment extends Fragment implements RegistrationView {
 
     private void onClickListener(View view){
 
+        _v=view;
+
         signUp.setOnClickListener(
                 v ->{
-                    createAccount(view);
+                    createAccount();
+                }
+        );
+
+        signIn.setOnClickListener(
+                v -> {
+                    Navigation.findNavController(view).navigate(R.id.action_registrationFragment_to_loginFragment);
+                }
+        );
+
+        skip.setOnClickListener(
+                v -> {
+                    Navigation.findNavController(view).navigate(R.id.action_registrationFragment_to_homeFragment);
+
                 }
         );
     }
 
-    private void createAccount(View view){
+    private void createAccount(){
         str_email = email.getText().toString();
         str_password = password.getText().toString();
-        _v=view;
 
-        registrationPresenter.checkDataValidation(email.getText().toString(),password.getText().toString(), confirmPassword.getText().toString());
+        registrationPresenter.checkDataValidation(
+                email.getText().toString(),
+                password.getText().toString(),
+                confirmPassword.getText().toString()
+        );
 
 
     }
@@ -139,25 +155,24 @@ public class RegistrationFragment extends Fragment implements RegistrationView {
     }
 
     @Override
-    public void validateEmail(boolean isEmailValid, String mes) {
-        if(!isEmailValid){
-            this.email.setError(mes);
-        }
-    }
+    public void validateEmail(String mes) {
 
-    @Override
-    public void validatePassword(boolean isPasswordValid, String mes) {
-        if(!isPasswordValid){
-            this.password.setError(mes);
-        }
+        this.email.setError(mes);
 
     }
 
     @Override
-    public void validateConfirmPassword(boolean isConfirmPasswordValid, String mes) {
-        if(!isConfirmPasswordValid){
-            this.confirmPassword.setError(mes);
-        }
+    public void validatePassword(String mes) {
+
+        this.password.setError(mes);
+
+
+    }
+
+    @Override
+    public void validateConfirmPassword(String mes) {
+
+        this.confirmPassword.setError(mes);
 
 
     }

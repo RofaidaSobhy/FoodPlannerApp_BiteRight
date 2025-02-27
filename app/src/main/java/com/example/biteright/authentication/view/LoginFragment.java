@@ -70,5 +70,11 @@ public class LoginFragment extends Fragment {
         signUp.setOnClickListener(
                 v -> Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registrationFragment)
         );
+
+        skip.setOnClickListener(
+                v -> {
+                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeFragment2);
+                }
+        );
     }
 }
