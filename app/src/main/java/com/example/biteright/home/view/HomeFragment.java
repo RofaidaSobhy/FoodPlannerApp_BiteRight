@@ -93,17 +93,17 @@ public class HomeFragment extends Fragment implements RandomMealView {
 
         initUI(view);
 
-        onClickListener(view);
+        //onClickListener(view);
 
 
     }
 
     private void initUI(View view){
-        txt_from_home_to_plan=view.findViewById(R.id.txt_from_home_to_plan);
-        txt_from_home_to_favourite=view.findViewById(R.id.txt_from_home_to_favourite);
-        txt_from_home_to_search=view.findViewById(R.id.txt_from_home_to_search);
-        txt_from_home_to_profile=view.findViewById(R.id.txt_from_home_to_profile);
-        txt_from_home_to_notification=view.findViewById(R.id.txt_from_home_to_notification);
+//        txt_from_home_to_plan=view.findViewById(R.id.txt_from_home_to_plan);
+//        txt_from_home_to_favourite=view.findViewById(R.id.txt_from_home_to_favourite);
+//        txt_from_home_to_search=view.findViewById(R.id.txt_from_home_to_search);
+//        txt_from_home_to_profile=view.findViewById(R.id.txt_from_home_to_profile);
+//        txt_from_home_to_notification=view.findViewById(R.id.txt_from_home_to_notification);
 
         randomMeal_image = view.findViewById(R.id.randomMeal_image);
         randomMeal_name = view.findViewById(R.id.randomMeal_name);
