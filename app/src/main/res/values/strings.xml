@@ -20,4 +20,8 @@
     <string name="Skip">Skip</string>
     <string name="AHappyBite">A Happy Bite</string>
     <string name="Hi">Hi!</string>
+    <string name="Ingredients">Ingredients</string>
+    <string name="Instructions">Instructions</string>
+    <string name="Video">Video</string>
+    <string name="Recipe">Recipe</string>
 </resources>

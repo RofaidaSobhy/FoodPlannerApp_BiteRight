@@ -58,8 +58,8 @@ public class SuggestedMealsAdapter extends RecyclerView.Adapter<SuggestedMealsAd
         Glide.with(context).load(meals[position].getStrMealThumb())
                 .apply(new RequestOptions()
                     .override(150, 160)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_foreground)
+                    .placeholder(R.drawable.dummy_food)
+                    .error(R.drawable.error_food)
                     .centerCrop())
                 .into(holder.meal_image);
 

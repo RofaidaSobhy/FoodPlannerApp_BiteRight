@@ -74,12 +74,19 @@
         <action
             android:id="@+id/action_homeFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recipeFragment2"
+            app:destination="@id/recipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.example.biteright.mealDetails.view.RecipeFragment"
         android:label="Recipe"
-        tools:layout="@layout/fragment_recipe" />
+        tools:layout="@layout/fragment_recipe" >
+        <argument
+            android:name="mealId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.biteright.search.view.SearchFragment"

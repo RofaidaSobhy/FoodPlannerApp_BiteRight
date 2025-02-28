@@ -38,11 +38,7 @@ import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSourceI
 public class HomeFragment extends Fragment implements RandomMealView {
 
 
-    private TextView txt_from_home_to_plan;
-    private TextView txt_from_home_to_favourite;
-    private TextView txt_from_home_to_profile;
-    private TextView txt_from_home_to_search;
-    private TextView txt_from_home_to_notification;
+
 
     private ImageView randomMeal_image;
     private TextView randomMeal_name;
@@ -57,7 +53,7 @@ public class HomeFragment extends Fragment implements RandomMealView {
 
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -93,17 +89,13 @@ public class HomeFragment extends Fragment implements RandomMealView {
 
         initUI(view);
 
-        //onClickListener(view);
+
 
 
     }
 
     private void initUI(View view){
-//        txt_from_home_to_plan=view.findViewById(R.id.txt_from_home_to_plan);
-//        txt_from_home_to_favourite=view.findViewById(R.id.txt_from_home_to_favourite);
-//        txt_from_home_to_search=view.findViewById(R.id.txt_from_home_to_search);
-//        txt_from_home_to_profile=view.findViewById(R.id.txt_from_home_to_profile);
-//        txt_from_home_to_notification=view.findViewById(R.id.txt_from_home_to_notification);
+
 
         randomMeal_image = view.findViewById(R.id.randomMeal_image);
         randomMeal_name = view.findViewById(R.id.randomMeal_name);
@@ -114,27 +106,8 @@ public class HomeFragment extends Fragment implements RandomMealView {
     }
 
 
-    private void onClickListener(View view){
-        txt_from_home_to_plan.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_planFragment)
-        );
 
-        txt_from_home_to_favourite.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_favouriteFragment)
-        );
 
-        txt_from_home_to_search.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_searchFragment)
-        );
-
-        txt_from_home_to_profile.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment)
-        );
-
-        txt_from_home_to_notification.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_notificationFragment)
-        );
-    }
 
     @Override
     public void showRandomMeal(Meal[] meals) {
@@ -144,8 +117,8 @@ public class HomeFragment extends Fragment implements RandomMealView {
         Glide.with(this).load(meals[0].getStrMealThumb())
                 .apply(new RequestOptions()
                     .override(350, 150)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_foreground)
+                    .placeholder(R.drawable.dummy_food)
+                    .error(R.drawable.error_food)
                     .centerCrop())
                 .into(randomMeal_image);
 

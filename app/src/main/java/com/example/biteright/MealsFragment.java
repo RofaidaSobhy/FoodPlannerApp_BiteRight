@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +20,7 @@ import com.example.biteright.home.model.suggestedmeals.SuggestedMealsRepositoryI
 import com.example.biteright.home.network.suggestedmeals.SuggestedMealsRemoteDataSourceImpl;
 import com.example.biteright.home.presenter.suggestedmeals.SuggestedMealsPresenter;
 import com.example.biteright.home.presenter.suggestedmeals.SuggestedMealsPresenterImpl;
+import com.example.biteright.home.view.HomeFragmentDirections;
 import com.example.biteright.home.view.suggestedmeals.OnMealClickListener;
 import com.example.biteright.home.view.suggestedmeals.SuggestedMealsAdapter;
 import com.example.biteright.home.view.suggestedmeals.SuggestedMealsView;
@@ -31,7 +33,7 @@ public class MealsFragment extends Fragment implements SuggestedMealsView, OnMea
     private SuggestedMealsAdapter suggestedMealsAdapter;
     private LinearLayoutManager linearLayoutManager;
     private SuggestedMealsPresenter suggestedMealsPresenter;
-
+    private View _v;
     public MealsFragment() {
         // Required empty public constructor
     }
@@ -64,6 +66,7 @@ public class MealsFragment extends Fragment implements SuggestedMealsView, OnMea
         setupSuggestedMealsAdapter();
     }
     private void initUI(View view){
+        _v = view;
         recyclerView_meals=view.findViewById(R.id.recyclerView_meals);
             recyclerView_meals.setHasFixedSize(true);
 
@@ -100,5 +103,9 @@ public class MealsFragment extends Fragment implements SuggestedMealsView, OnMea
     @Override
     public void OnMealClick(Meal meal) {
         //go to details fragment
+        HomeFragmentDirections.ActionHomeFragmentToRecipeFragment2 action =
+                HomeFragmentDirections.actionHomeFragmentToRecipeFragment2(meal.getIdMeal());
+        Navigation.findNavController(_v).navigate(action);
+
     }
 }

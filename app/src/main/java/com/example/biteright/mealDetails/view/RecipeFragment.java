@@ -36,7 +36,7 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
         mealDetailsPresenter = new MealDetailsPresenterImpl(this,
                 MealDetailsRepositoryImpl.getInstance(MealDetailsRemoteDataSourceImpl.getInstance()));
 
-        String mealId="52772";
+        String mealId=RecipeFragmentArgs.fromBundle(getArguments()).getMealId();
         mealDetailsPresenter.getMealDetails(mealId);
 
 
@@ -52,7 +52,7 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
     @Override
     public void showMealDetails(Meal[] meals) {
         Log.i("TAG", "showMealDetails: "+meals[0].getStrArea());
-        Toast.makeText(getContext(),meals[0].getIdMeal(),Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),meals[0].getStrMeal(),Toast.LENGTH_LONG).show();
     }
 
     @Override
