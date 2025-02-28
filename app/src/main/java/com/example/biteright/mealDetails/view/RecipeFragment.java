@@ -18,17 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.biteright.R;
+import com.example.biteright.data.local.db.FavMealLocalDataSourceImpl;
+import com.example.biteright.data.repo.MealRepositoryImpl;
 import com.example.biteright.mealDetails.model.MealDetailsRepositoryImpl;
 import com.example.biteright.mealDetails.network.MealDetailsRemoteDataSourceImpl;
 import com.example.biteright.mealDetails.presenter.MealDetailsPresenter;
@@ -36,7 +35,6 @@ import com.example.biteright.mealDetails.presenter.MealDetailsPresenterImpl;
 import com.example.biteright.model.Details_Ingredient;
 import com.example.biteright.model.Meal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -50,6 +48,7 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
     private TextView details_country;
     private TextView details_category;
     private TextView details_instructions;
+    private ImageButton details_favorite;
 
     private ImageView details_image;
     private WebView details_video;
@@ -61,6 +60,8 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
 
     private LinearLayoutManager linearLayoutManager;
     private NavController navController;
+
+    private Meal meal;
 
 
 
@@ -76,7 +77,8 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
         super.onCreate(savedInstanceState);
 
         mealDetailsPresenter = new MealDetailsPresenterImpl(this,
-                MealDetailsRepositoryImpl.getInstance(MealDetailsRemoteDataSourceImpl.getInstance()));
+                MealDetailsRepositoryImpl.getInstance(MealDetailsRemoteDataSourceImpl.getInstance()),
+                MealRepositoryImpl.getInstance(new FavMealLocalDataSourceImpl(getContext())));
 
         String mealId=RecipeFragmentArgs.fromBundle(getArguments()).getMealId();
         mealDetailsPresenter.getMealDetails(mealId);
@@ -112,6 +114,12 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
                     navController.popBackStack();
                 }
         );
+
+        details_favorite.setOnClickListener(
+                v -> {
+                    mealDetailsPresenter.addToFav(meal);
+                }
+        );
     }
 
     private void setupDetails_IngredientsAdapter(){
@@ -127,6 +135,7 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
         details_category = view.findViewById(R.id.details_category);
         details_instructions = view.findViewById(R.id.details_instructions);
         details_back = view.findViewById(R.id.details_back);
+        details_favorite = view.findViewById(R.id.details_favorite);
 
         details_image = view.findViewById(R.id.details_image);
         details_video= view.findViewById(R.id.details_video);
@@ -144,6 +153,7 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
         Log.i("TAG", "showMealDetails: "+meals[0].getStrArea());
         Toast.makeText(getContext(),meals[0].getStrMeal(),Toast.LENGTH_LONG).show();
 
+        this.meal=meals[0];
 
         mealDetailsPresenter.getIngredients(meals[0]);
 

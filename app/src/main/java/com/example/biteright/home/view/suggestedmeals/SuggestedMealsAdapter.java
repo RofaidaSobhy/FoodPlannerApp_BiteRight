@@ -51,7 +51,8 @@ public class SuggestedMealsAdapter extends RecyclerView.Adapter<SuggestedMealsAd
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         holder.meal_name.setText(meals[position].getStrMeal());
-        holder.meal_description.setText(meals[position].getStrInstructions().substring(0,25)+"...");
+        holder.meal_description.setText(meals[position].getStrInstructions()
+                .substring(0,meals[position].getStrInstructions().length()-1));
         holder.meal_area.setText(meals[position].getStrArea());
 
 
@@ -62,9 +63,6 @@ public class SuggestedMealsAdapter extends RecyclerView.Adapter<SuggestedMealsAd
                     .error(R.drawable.error_food)
                     .centerCrop())
                 .into(holder.meal_image);
-
-
-
 
 
 

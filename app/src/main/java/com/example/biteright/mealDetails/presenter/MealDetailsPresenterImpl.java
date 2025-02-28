@@ -1,5 +1,9 @@
 package com.example.biteright.mealDetails.presenter;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
+
+import com.example.biteright.data.repo.MealRepository;
 import com.example.biteright.mealDetails.model.MealDetailsRepository;
 import com.example.biteright.mealDetails.view.MealDetailsView;
 import com.example.biteright.model.Details_Ingredient;
@@ -9,13 +13,19 @@ import com.example.biteright.network.NetworkCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class MealDetailsPresenterImpl implements MealDetailsPresenter, NetworkCallback {
     private MealDetailsView _view;
     private MealDetailsRepository _repo;
+    private MealRepository mealRepository;
 
-    public MealDetailsPresenterImpl(MealDetailsView _view, MealDetailsRepository _repo) {
+    public MealDetailsPresenterImpl(MealDetailsView _view, MealDetailsRepository _repo, MealRepository mealRepository) {
         this._view = _view;
         this._repo = _repo;
+        this.mealRepository= mealRepository;
     }
 
     @Override
@@ -47,5 +57,24 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter, NetworkCa
         }
 
         _view.showIngredientsDetails(ingredientList);
+    }
+
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void addToFav(Meal meal) {
+        Completable completable_Product = mealRepository.insertMeal(meal);
+        completable_Product
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> {
+                            Log.i("TAG", "addToFav Successfully: ");
+                        },
+                        error -> {
+                            Log.i("TAG", "addToFav: ");
+                            _view.showErrMsg(error.getMessage());
+                        }
+                );
     }
 }

@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/meal_card"
+    android:id="@+id/favMeal_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/WhiteBeige">
+    android:background="@color/WhiteBeige"
+    >
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/favMeal_image"
@@ -22,7 +23,7 @@
         app:srcCompat="@drawable/dummy_food" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/constraintLayout_favMeal"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
@@ -51,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:maxLength="25"
+
             app:layout_constraintStart_toStartOf="@+id/favMeal_name"
             app:layout_constraintTop_toBottomOf="@+id/favMeal_name"
             tools:text="Meal Description" />
@@ -76,7 +79,7 @@
             tools:text="Meal Area" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/btn_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/fav_plan_toolbar"

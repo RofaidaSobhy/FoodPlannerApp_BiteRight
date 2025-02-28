@@ -50,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:maxLength="25"
             app:layout_constraintStart_toStartOf="@+id/meal_name"
             app:layout_constraintTop_toBottomOf="@+id/meal_name"
             tools:text="Meal Description" />
