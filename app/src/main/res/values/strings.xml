@@ -24,4 +24,6 @@
     <string name="Instructions">Instructions</string>
     <string name="Video">Video</string>
     <string name="Recipe">Recipe</string>
+    <string name="category">Category</string>
+    <string name="country">Country</string>
 </resources>
