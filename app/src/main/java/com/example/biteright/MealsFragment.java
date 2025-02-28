@@ -102,7 +102,6 @@ public class MealsFragment extends Fragment implements SuggestedMealsView, OnMea
 
     @Override
     public void OnMealClick(Meal meal) {
-        //go to details fragment
         HomeFragmentDirections.ActionHomeFragmentToRecipeFragment2 action =
                 HomeFragmentDirections.actionHomeFragmentToRecipeFragment2(meal.getIdMeal());
         Navigation.findNavController(_v).navigate(action);

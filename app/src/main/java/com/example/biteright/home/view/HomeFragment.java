@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,6 +45,9 @@ public class HomeFragment extends Fragment implements RandomMealView {
     private TextView randomMeal_name;
     private TextView randomMeal_description;
     private TextView randomMeal_area;
+    private CardView cardView_randomMeal;
+
+    private String randomMealID;
 
 
 
@@ -88,6 +92,7 @@ public class HomeFragment extends Fragment implements RandomMealView {
         super.onViewCreated(view, savedInstanceState);
 
         initUI(view);
+        onClick();
 
 
 
@@ -101,8 +106,19 @@ public class HomeFragment extends Fragment implements RandomMealView {
         randomMeal_name = view.findViewById(R.id.randomMeal_name);
         randomMeal_description = view.findViewById(R.id.randomMeal_description);
         randomMeal_area = view.findViewById(R.id.randomMeal_area);
+        cardView_randomMeal = view.findViewById(R.id.cardView_randomMeal);
 
 
+    }
+
+    private void onClick(){
+        cardView_randomMeal.setOnClickListener(
+                v -> {
+                    HomeFragmentDirections.ActionHomeFragmentToRecipeFragment2 action =
+                            HomeFragmentDirections.actionHomeFragmentToRecipeFragment2(randomMealID);
+                    Navigation.findNavController(v).navigate(action);
+                }
+        );
     }
 
 
@@ -125,7 +141,7 @@ public class HomeFragment extends Fragment implements RandomMealView {
         randomMeal_name.setText(meals[0].getStrMeal());
         randomMeal_area.setText(meals[0].getStrArea());
         randomMeal_description.setText(meals[0].getStrInstructions().substring(0,meals[0].getStrInstructions().length()-1) );
-
+        randomMealID = meals[0].getIdMeal();
     }
 
 

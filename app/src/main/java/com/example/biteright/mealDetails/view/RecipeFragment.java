@@ -1,27 +1,69 @@
 package com.example.biteright.mealDetails.view;
 
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.biteright.R;
 import com.example.biteright.mealDetails.model.MealDetailsRepositoryImpl;
 import com.example.biteright.mealDetails.network.MealDetailsRemoteDataSourceImpl;
 import com.example.biteright.mealDetails.presenter.MealDetailsPresenter;
 import com.example.biteright.mealDetails.presenter.MealDetailsPresenterImpl;
+import com.example.biteright.model.Details_Ingredient;
 import com.example.biteright.model.Meal;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RecipeFragment extends Fragment implements MealDetailsView {
 
-    MealDetailsPresenter mealDetailsPresenter;
+    private MealDetailsPresenter mealDetailsPresenter;
+
+
+
+    private TextView details_name;
+    private TextView details_country;
+    private TextView details_category;
+    private TextView details_instructions;
+
+    private ImageView details_image;
+    private WebView details_video;
+    private ImageButton details_back;
+
+    private RecyclerView recyclerView_details_ingredients;
+
+    private Ingredients_MealDetailsAdapter ingredientsMealDetailsAdapter;
+
+    private LinearLayoutManager linearLayoutManager;
+    private NavController navController;
+
+
+
 
     public RecipeFragment() {
         // Required empty public constructor
@@ -40,6 +82,8 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
         mealDetailsPresenter.getMealDetails(mealId);
 
 
+
+
     }
 
     @Override
@@ -47,19 +91,120 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recipe, container, false);
+
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        initUI(view);
+        setupDetails_IngredientsAdapter();
+        onClick();
+
+    }
+    private void onClick(){
+        details_back.setOnClickListener(
+                v->{
+                    navController= Navigation.findNavController(v);
+                    navController.popBackStack();
+                }
+        );
+    }
+
+    private void setupDetails_IngredientsAdapter(){
+        linearLayoutManager=new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+
+        recyclerView_details_ingredients.setLayoutManager(linearLayoutManager);
+
+    }
+    private void initUI(View view){
+        details_name = view.findViewById(R.id.details_name);
+        details_country = view.findViewById(R.id.details_country);
+        details_category = view.findViewById(R.id.details_category);
+        details_instructions = view.findViewById(R.id.details_instructions);
+        details_back = view.findViewById(R.id.details_back);
+
+        details_image = view.findViewById(R.id.details_image);
+        details_video= view.findViewById(R.id.details_video);
+        recyclerView_details_ingredients = view.findViewById(R.id.recyclerView_details_ingredients);
+        recyclerView_details_ingredients.setHasFixedSize(true);
+
+
+
+
     }
 
     @Override
     public void showMealDetails(Meal[] meals) {
+
         Log.i("TAG", "showMealDetails: "+meals[0].getStrArea());
         Toast.makeText(getContext(),meals[0].getStrMeal(),Toast.LENGTH_LONG).show();
+
+
+        mealDetailsPresenter.getIngredients(meals[0]);
+
+        Glide.with(this).load(meals[0].getStrMealThumb())
+                .apply(new RequestOptions()
+                        .override(356, 281)
+                        .placeholder(R.drawable.dummy_food)
+                        .error(R.drawable.error_food)
+                        .centerCrop())
+                .into(details_image);
+
+        details_name.setText(meals[0].getStrMeal());
+        details_country.setText(meals[0].getStrArea());
+        details_category.setText(meals[0].getStrCategory());
+
+        String[] instructions = meals[0].getStrInstructions().split("\\.");
+
+        int counter=1;
+        for (String instruction : instructions) {
+
+            details_instructions.append(counter+". "+instruction+"\n \t\t_________________________________________\n\n");
+            counter++;
+        }
+
+
+
+        loadYouTubeVideo(meals[0].getStrYoutube());
+
+
+
     }
 
+    private void loadYouTubeVideo(String youtubeUrl) {
+        details_video.getSettings().setJavaScriptEnabled(true);
+        details_video.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        details_video.setWebChromeClient(new WebChromeClient());
+        Uri uri = Uri.parse(youtubeUrl);
+        String videoId = uri.getQueryParameter("v");
+
+        if (videoId != null) {
+            String iframe = "<iframe width=\"100%\" height=\"100%\" " +
+                    "src=\"https://www.youtube.com/embed/" + videoId + "?autoplay=0&mute=0\" " +
+                    "frameborder=\"0\" allowfullscreen></iframe>";
+
+            details_video.loadData(iframe, "text/html", "utf-8");
+        } else {
+            details_video.setVisibility(View.GONE);
+        }
+    }
     @Override
     public void showErrMsg(String error) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(error).setTitle("An Error Occurred");
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void showIngredientsDetails(List<Details_Ingredient> ingredientList) {
+        ingredientsMealDetailsAdapter = new Ingredients_MealDetailsAdapter(getContext(),ingredientList);
+        recyclerView_details_ingredients.setAdapter(ingredientsMealDetailsAdapter);
+
     }
 }

@@ -477,4 +477,57 @@ public class Meal{
     }
 
 
+    public String getIngredient(int index) {
+        switch (index) {
+            case 1: return getStrIngredient1();
+            case 2: return getStrIngredient2();
+            case 3: return getStrIngredient3();
+            case 4: return getStrIngredient4();
+            case 5: return getStrIngredient5();
+            case 6: return getStrIngredient6();
+            case 7: return getStrIngredient7();
+            case 8: return getStrIngredient8();
+            case 9: return getStrIngredient9();
+            case 10: return getStrIngredient10();
+            case 11: return getStrIngredient11();
+            case 12: return getStrIngredient12();
+            case 13: return getStrIngredient13();
+            case 14: return getStrIngredient14();
+            case 15: return getStrIngredient15();
+            case 16: return getStrIngredient16();
+            case 17: return getStrIngredient17();
+            case 18: return getStrIngredient18();
+            case 19: return getStrIngredient19();
+            case 20: return getStrIngredient20();
+
+            default: return "";
+        }
+    }
+
+    public String getMeasure(int index) {
+        switch (index) {
+            case 1: return getStrMeasure1();
+            case 2: return getStrMeasure2();
+            case 3: return getStrMeasure3();
+            case 4: return getStrMeasure4();
+            case 5: return getStrMeasure5();
+            case 6: return getStrMeasure6();
+            case 7: return getStrMeasure7();
+            case 8: return getStrMeasure8();
+            case 9: return getStrMeasure9();
+            case 10: return getStrMeasure10();
+            case 11: return getStrMeasure11();
+            case 12: return getStrMeasure12();
+            case 13: return getStrMeasure13();
+            case 14: return getStrMeasure14();
+            case 15: return getStrMeasure15();
+            case 16: return getStrMeasure16();
+            case 17: return getStrMeasure17();
+            case 18: return getStrMeasure18();
+            case 19: return getStrMeasure19();
+            case 20: return getStrMeasure20();
+            default: return "";
+        }
+    }
+
 }
