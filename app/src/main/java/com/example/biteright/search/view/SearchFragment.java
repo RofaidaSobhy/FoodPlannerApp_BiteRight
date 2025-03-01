@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.biteright.R;
@@ -24,9 +25,7 @@ import com.google.android.material.chip.Chip;
 
 public class SearchFragment extends Fragment {
 
-    private TextView txt_search;
-    private TextView txt_ingredients;
-    private TextView txt_area;
+    private SearchView searchView;
     private Chip chip_category;
     private Chip chip_ingredient;
     private Chip chip_country;
@@ -43,9 +42,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
 
 
     }
@@ -69,10 +65,8 @@ public class SearchFragment extends Fragment {
     }
 
     private void initUI(View view){
-        txt_search=view.findViewById(R.id.txt_search);
-        txt_ingredients=view.findViewById(R.id.txt_ingredients);
-        txt_area=view.findViewById(R.id.txt_area);
 
+        searchView = view.findViewById(R.id.searchView);
         chip_category = view.findViewById(R.id.chip_category);
         chip_ingredient = view.findViewById(R.id.chip_ingredient);
         chip_country = view.findViewById(R.id.chip_country);
@@ -81,19 +75,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void onClickListener(View view){
-        txt_search.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_searchFragment_to_searchByMealFragment)
-        );
 
-
-
-        txt_ingredients.setOnClickListener(
-                v -> Log.i("TAG", "onClickListener: ")
-        );
-
-        txt_area.setOnClickListener(
-                v -> Log.i("TAG", "onClickListener: ")
-        );
 
 
         chip_category.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -108,6 +90,20 @@ public class SearchFragment extends Fragment {
             handleFragmentTransaction(isChecked, "countries-fragment", new ListAreaFragment());
         });
 
+
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                categoriesPresenter.onSearchQueryChanged(query);
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                categoriesPresenter.onSearchQueryChanged(newText);  // Handle real-time search
+//                return true;
+//            }
+//        });
 
 
     }

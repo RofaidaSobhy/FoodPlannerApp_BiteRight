@@ -52,7 +52,7 @@ public class MealRemoteDataSourceImp implements MealRemoteDataSource{
     @Override
     public Single<List<Ingredient>> getIngredients() {
         return mealService.getIngredients()
-                .map(ingredientResponse -> ingredientResponse.getIngredients()
+                .map(ingredientResponse -> ingredientResponse.getMeals()
                 );
     }
 }

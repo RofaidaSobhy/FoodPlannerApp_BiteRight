@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientResponse {
-    public List<Ingredient> ingredients;
+    public List<Ingredient> meals;
 
-    public List<Ingredient> getIngredients() {
-        return ingredients != null ? ingredients : new ArrayList<>();
+    public List<Ingredient> getMeals() {
+        return meals != null ? meals : new ArrayList<>();
     }
 }

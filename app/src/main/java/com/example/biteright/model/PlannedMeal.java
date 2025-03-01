@@ -1,17 +1,23 @@
 package com.example.biteright.model;
 
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "favmeal")
-public class Meal{
+@Entity(tableName = "plannedmeal")
+public class PlannedMeal{
 
     @PrimaryKey
     @NonNull
     public String idMeal;
-    public String userName;
     public String strMeal;
+
+    public String userName;
+    public String plannedData;
+
+
+
     public String strCategory;
     public String strArea;
     public String strInstructions;
@@ -66,10 +72,73 @@ public class Meal{
         this.userName = userName;
     }
 
-    public Meal(@NonNull String idMeal, String userName, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20) {
+
+
+    public PlannedMeal(Meal meal, String planddedData) {
+        this.plannedData=planddedData;
+        this.idMeal = meal.getIdMeal();
+        this.strMeal = meal.getStrMeal();
+        this.userName = meal.getUserName();
+        this.strCategory = meal.getStrCategory();
+        this.strArea = meal.getStrArea();
+        this.strInstructions = meal.getStrInstructions();
+        this.strMealThumb = meal.getStrMealThumb();
+        this.strYoutube = meal.getStrYoutube();
+        this.strIngredient1 = meal.getStrIngredient1();
+        this.strIngredient2 = meal.getStrIngredient2();
+        this.strIngredient3 = meal.getStrIngredient3();
+        this.strIngredient4 = meal.getStrIngredient4();
+        this.strIngredient5 = meal.getStrIngredient5();
+        this.strIngredient6 = meal.getStrIngredient6();
+        this.strIngredient7 = meal.getStrIngredient7();
+        this.strIngredient8 = meal.getStrIngredient8();
+        this.strIngredient9 = meal.getStrIngredient9();
+        this.strIngredient10 = meal.getStrIngredient10();
+        this.strIngredient11 = meal.getStrIngredient11();
+        this.strIngredient12 = meal.getStrIngredient12();
+        this.strIngredient13 = meal.getStrIngredient13();
+        this.strIngredient14 = meal.getStrIngredient14();
+        this.strIngredient15 = meal.getStrIngredient15();
+        this.strIngredient16 = meal.getStrIngredient16();
+        this.strIngredient17 = meal.getStrIngredient17();
+        this.strIngredient18 = meal.getStrIngredient18();
+        this.strIngredient19 = meal.getStrIngredient19();
+        this.strIngredient20 = meal.getStrIngredient20();
+        this.strMeasure1 = meal.getStrMeasure1();
+        this.strMeasure2 = meal.getStrMeasure2();
+        this.strMeasure3 = meal.getStrMeasure3();
+        this.strMeasure4 = meal.getStrMeasure4();
+        this.strMeasure5 = meal.getStrMeasure5();
+        this.strMeasure6 = meal.getStrMeasure6();
+        this.strMeasure7 = meal.getStrMeasure7();
+        this.strMeasure8 = meal.getStrMeasure8();
+        this.strMeasure9 = meal.getStrMeasure9();
+        this.strMeasure10 = meal.getStrMeasure10();
+        this.strMeasure11 = meal.getStrMeasure11();
+        this.strMeasure12 = meal.getStrMeasure12();
+        this.strMeasure13 = meal.getStrMeasure13();
+        this.strMeasure14 = meal.getStrMeasure14();
+        this.strMeasure15 = meal.getStrMeasure15();
+        this.strMeasure16 = meal.getStrMeasure16();
+        this.strMeasure17 = meal.getStrMeasure17();
+        this.strMeasure18 = meal.getStrMeasure18();
+        this.strMeasure19 = meal.getStrMeasure19();
+        this.strMeasure20 = meal.getStrMeasure20();
+    }
+
+    public String getPlannedData() {
+        return plannedData;
+    }
+
+    public void setPlannedData(String plannedData) {
+        this.plannedData = plannedData;
+    }
+
+    public PlannedMeal(@NonNull String idMeal, String strMeal, String userName, String plannedData, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20) {
         this.idMeal = idMeal;
-        this.userName = userName;
         this.strMeal = strMeal;
+        this.userName = userName;
+        this.plannedData = plannedData;
         this.strCategory = strCategory;
         this.strArea = strArea;
         this.strInstructions = strInstructions;

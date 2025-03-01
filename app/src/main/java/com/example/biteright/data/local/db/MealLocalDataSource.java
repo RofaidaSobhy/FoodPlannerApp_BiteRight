@@ -1,6 +1,7 @@
 package com.example.biteright.data.local.db;
 
 import com.example.biteright.model.Meal;
+import com.example.biteright.model.PlannedMeal;
 
 import java.util.List;
 
@@ -13,4 +14,10 @@ public interface MealLocalDataSource {
     Completable deleteMeal(Meal meal);
 
     Observable<List<Meal>> getMeals();
+
+    Completable addPlannedMeal(PlannedMeal plannedMeal);
+
+    Completable deletePlannedMeal(PlannedMeal plannedMeal);
+
+    Observable<List<PlannedMeal>> getPlannedMeals(String date);
 }

@@ -4,6 +4,7 @@ import com.example.biteright.data.models.POJO.Area;
 import com.example.biteright.data.models.POJO.Category;
 import com.example.biteright.data.models.POJO.Ingredient;
 import com.example.biteright.model.Meal;
+import com.example.biteright.model.PlannedMeal;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface MealRepository {
     Observable<List<Meal>> getStoredMeals();
     Completable insertMeal(Meal meal);
     Completable deleteMeal(Meal meal);
+
+    Observable<List<PlannedMeal>> getStoredPlannedMeals(String date);
+    Completable insertPlannedMeal(PlannedMeal plannedMeal);
+    Completable deletePlannedMeal(PlannedMeal plannedMeal);
 }

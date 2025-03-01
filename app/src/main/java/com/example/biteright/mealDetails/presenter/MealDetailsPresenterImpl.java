@@ -8,6 +8,7 @@ import com.example.biteright.mealDetails.model.MealDetailsRepository;
 import com.example.biteright.mealDetails.view.MealDetailsView;
 import com.example.biteright.data.models.POJO.Details_Ingredient;
 import com.example.biteright.model.Meal;
+import com.example.biteright.model.PlannedMeal;
 import com.example.biteright.network.NetworkCallback;
 
 import java.util.ArrayList;
@@ -73,6 +74,23 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter, NetworkCa
                         },
                         error -> {
                             Log.i("TAG", "addToFav: ");
+                            _view.showErrMsg(error.getMessage());
+                        }
+                );
+    }
+
+    @Override
+    public void addToPlan(PlannedMeal plannedMeal) {
+        Completable completable_plannedMeal = mealRepository.insertPlannedMeal(plannedMeal);
+        completable_plannedMeal
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> {
+                            Log.i("TAG", "addToCalendar Successfully: ");
+                        },
+                        error -> {
+                            Log.i("TAG", "addToCalendar: ");
                             _view.showErrMsg(error.getMessage());
                         }
                 );

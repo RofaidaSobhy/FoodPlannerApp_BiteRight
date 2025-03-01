@@ -1,5 +1,6 @@
 package com.example.biteright.mealDetails.view;
 
+import android.app.DatePickerDialog;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -35,7 +36,9 @@ import com.example.biteright.mealDetails.presenter.MealDetailsPresenter;
 import com.example.biteright.mealDetails.presenter.MealDetailsPresenterImpl;
 import com.example.biteright.data.models.POJO.Details_Ingredient;
 import com.example.biteright.model.Meal;
+import com.example.biteright.model.PlannedMeal;
 
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -52,6 +55,8 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
     private ImageButton details_favorite;
     private ImageButton details_favorite_added;
 
+    private ImageButton details_plan;
+
     private ImageView details_image;
 
     private WebView details_video;
@@ -65,6 +70,7 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
     private NavController navController;
 
     private Meal meal;
+    private PlannedMeal plannedMeal;
 
 
 
@@ -130,6 +136,47 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
 //                    details_favorite_added.setVisibility(View.VISIBLE);
                 }
         );
+
+        details_plan.setOnClickListener(
+                v -> {
+                    showDatePickerDialog();
+
+                }
+        );
+    }
+
+    private void showDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        long today = calendar.getTimeInMillis();
+
+        calendar.add(Calendar.DAY_OF_MONTH, 7);
+        long weekAhead = calendar.getTimeInMillis();
+        calendar = Calendar.getInstance();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(),
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    String selectedDate = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+
+                    plannedMeal=new PlannedMeal(meal, selectedDate);
+                    mealDetailsPresenter.addToPlan(plannedMeal);
+
+
+
+                },
+                year, month, day
+
+
+        );
+
+        datePickerDialog.getDatePicker().setMinDate(today);
+        datePickerDialog.getDatePicker().setMaxDate(weekAhead);
+
+        datePickerDialog.show();
     }
 
     private void setupDetails_IngredientsAdapter(){
@@ -147,6 +194,7 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
         details_back = view.findViewById(R.id.details_back);
         details_favorite = view.findViewById(R.id.details_favorite);
         details_favorite_added= view.findViewById(R.id.details_favorite_added);
+        details_plan = view.findViewById(R.id.details_plan);
 
         details_image = view.findViewById(R.id.details_image);
         details_video= view.findViewById(R.id.details_video);
