@@ -1,4 +1,6 @@
-package com.example.biteright.model;
+package com.example.biteright.data.models.POJO;
+
+import com.example.biteright.model.Meal;
 
 public class Root{
     public Meal[] meals;

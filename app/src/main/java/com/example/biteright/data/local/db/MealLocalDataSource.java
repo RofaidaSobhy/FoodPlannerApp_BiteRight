@@ -7,7 +7,7 @@ import java.util.List;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
 
-public interface FavMealLocalDataSource {
+public interface MealLocalDataSource {
     Completable addMeal(Meal meal);
 
     Completable deleteMeal(Meal meal);

@@ -9,10 +9,10 @@ import java.util.List;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
 
-public class FavMealLocalDataSourceImpl implements FavMealLocalDataSource {
+public class MealLocalDataSourceImpl implements MealLocalDataSource {
     private FavMealDAO dao;
 
-    public FavMealLocalDataSourceImpl(Context context){
+    public MealLocalDataSourceImpl(Context context){
         FavMealsDataBase db=FavMealsDataBase.getInstance(context);
         dao=db.getMealsDAO();
     }

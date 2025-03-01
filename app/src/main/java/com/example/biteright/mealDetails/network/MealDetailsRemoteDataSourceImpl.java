@@ -2,7 +2,7 @@ package com.example.biteright.mealDetails.network;
 
 import android.util.Log;
 
-import com.example.biteright.model.Root;
+import com.example.biteright.data.models.POJO.Root;
 import com.example.biteright.network.NetworkCallback;
 
 import retrofit2.Call;

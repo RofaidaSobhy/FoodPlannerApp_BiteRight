@@ -1,4 +1,4 @@
-package com.example.biteright.model;
+package com.example.biteright.data.models.POJO;
 
 public class Details_Ingredient {
     String name;

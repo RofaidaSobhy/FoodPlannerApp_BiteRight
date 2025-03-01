@@ -4,8 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -13,30 +14,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.biteright.R;
-import com.example.biteright.home.model.randommeal.RandomMealRepositoryImpl;
-import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSourceImpl;
-import com.example.biteright.home.presenter.randommeal.RandomMealPresenter;
-import com.example.biteright.home.presenter.randommeal.RandomMealPresenterImpl;
-import com.example.biteright.home.view.randommeal.RandomMealView;
-import com.example.biteright.model.Category;
-import com.example.biteright.search.model.categories.CategoriesRepositoryImpl;
-import com.example.biteright.search.network.categories.CategoriesRemoteDataSourceImpl;
-import com.example.biteright.search.presenter.categories.CategoriesPresenter;
-import com.example.biteright.search.presenter.categories.CategoriesPresenterImpl;
-import com.example.biteright.search.view.categories.CategoriesView;
+import com.example.biteright.search.view.area.ListAreaFragment;
+import com.example.biteright.search.view.categories.ListCategoriesFragment;
+import com.example.biteright.search.view.ingredients.ListIngredientsFragment;
+import com.google.android.material.chip.Chip;
 
 
-public class SearchFragment extends Fragment implements CategoriesView {
+public class SearchFragment extends Fragment {
 
     private TextView txt_search;
-    private TextView txt_categories;
     private TextView txt_ingredients;
     private TextView txt_area;
-    private CategoriesPresenter categoriesPresenter;
-    private Category[] categories;
+    private Chip chip_category;
+    private Chip chip_ingredient;
+    private Chip chip_country;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+    private Fragment existingFragment;
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -46,19 +44,13 @@ public class SearchFragment extends Fragment implements CategoriesView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getCategories();
+
+
 
 
     }
 
-    private void getCategories(){
-        categoriesPresenter = new CategoriesPresenterImpl(this,
-                CategoriesRepositoryImpl.getInstance(
-                        CategoriesRemoteDataSourceImpl.getInstance()
-                ));
 
-        categoriesPresenter.getCategories();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,11 +70,14 @@ public class SearchFragment extends Fragment implements CategoriesView {
 
     private void initUI(View view){
         txt_search=view.findViewById(R.id.txt_search);
-        txt_categories=view.findViewById(R.id.txt_categories);
         txt_ingredients=view.findViewById(R.id.txt_ingredients);
         txt_area=view.findViewById(R.id.txt_area);
 
+        chip_category = view.findViewById(R.id.chip_category);
+        chip_ingredient = view.findViewById(R.id.chip_ingredient);
+        chip_country = view.findViewById(R.id.chip_country);
 
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 
     private void onClickListener(View view){
@@ -90,9 +85,7 @@ public class SearchFragment extends Fragment implements CategoriesView {
                 v -> Navigation.findNavController(view).navigate(R.id.action_searchFragment_to_searchByMealFragment)
         );
 
-        txt_categories.setOnClickListener(
-                v-> Toast.makeText(getContext(),categories.length+"",Toast.LENGTH_LONG).show()
-        );
+
 
         txt_ingredients.setOnClickListener(
                 v -> Log.i("TAG", "onClickListener: ")
@@ -101,21 +94,40 @@ public class SearchFragment extends Fragment implements CategoriesView {
         txt_area.setOnClickListener(
                 v -> Log.i("TAG", "onClickListener: ")
         );
+
+
+        chip_category.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            handleFragmentTransaction(isChecked, "categories-fragment", new ListCategoriesFragment());
+        });
+
+        chip_ingredient.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            handleFragmentTransaction(isChecked, "ingredients-fragment", new ListIngredientsFragment());
+        });
+
+        chip_country.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            handleFragmentTransaction(isChecked, "countries-fragment", new ListAreaFragment());
+        });
+
+
+
     }
 
-    @Override
-    public void showCategories(Category[] categories) {
-        Log.i("TAG", "showCategories: "+categories[0].getStrCategory());
-        //Toast.makeText(getContext(),categories.length+"",Toast.LENGTH_LONG).show();
-        this.categories=categories;
-
+    private void handleFragmentTransaction(boolean isChecked, String fragmentTag, Fragment fragment) {
+        fragmentTransaction = fragmentManager.beginTransaction();
+        if (isChecked) {
+            existingFragment = fragmentManager.findFragmentByTag(fragmentTag);
+            if (existingFragment == null) {
+                fragmentTransaction.replace(R.id.searchFragmentContainerView, fragment, fragmentTag);
+                fragmentTransaction.commit();
+            }
+        } else {
+            existingFragment = fragmentManager.findFragmentByTag(fragmentTag);
+            if (existingFragment != null) {
+                fragmentTransaction.remove(existingFragment);
+                fragmentTransaction.commit();
+            }
+        }
     }
 
-    @Override
-    public void showErrMsg(String error) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(error).setTitle("An Error Occurred");
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+
 }

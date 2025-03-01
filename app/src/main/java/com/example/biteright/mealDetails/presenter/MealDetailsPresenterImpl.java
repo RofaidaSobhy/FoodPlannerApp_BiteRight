@@ -6,7 +6,7 @@ import android.util.Log;
 import com.example.biteright.data.repo.MealRepository;
 import com.example.biteright.mealDetails.model.MealDetailsRepository;
 import com.example.biteright.mealDetails.view.MealDetailsView;
-import com.example.biteright.model.Details_Ingredient;
+import com.example.biteright.data.models.POJO.Details_Ingredient;
 import com.example.biteright.model.Meal;
 import com.example.biteright.network.NetworkCallback;
 

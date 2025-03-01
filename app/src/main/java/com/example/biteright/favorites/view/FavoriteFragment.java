@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.biteright.R;
-import com.example.biteright.data.local.db.FavMealLocalDataSourceImpl;
+import com.example.biteright.data.local.db.MealLocalDataSourceImpl;
+import com.example.biteright.data.network.MealRemoteDataSourceImp;
 import com.example.biteright.data.repo.MealRepositoryImpl;
 import com.example.biteright.favorites.presenter.FavoritePresenter;
 import com.example.biteright.favorites.presenter.FavoritePresenterImpl;
-import com.example.biteright.home.view.HomeFragmentDirections;
 import com.example.biteright.model.Meal;
 
 import java.util.ArrayList;
@@ -59,7 +58,10 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
 
         favoritePresenter = new FavoritePresenterImpl(this,
                 MealRepositoryImpl.getInstance(
-                        new FavMealLocalDataSourceImpl(getContext())));
+                        new MealLocalDataSourceImpl(getContext())
+                        , MealRemoteDataSourceImp.getInstance()
+                )
+        );
 
         initUI(view);
         setupRecyclerView();

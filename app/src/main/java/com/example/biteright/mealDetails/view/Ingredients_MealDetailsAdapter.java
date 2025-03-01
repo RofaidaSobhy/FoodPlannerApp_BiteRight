@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.biteright.R;
-import com.example.biteright.model.Details_Ingredient;
+import com.example.biteright.data.models.POJO.Details_Ingredient;
 
 import java.util.List;
 

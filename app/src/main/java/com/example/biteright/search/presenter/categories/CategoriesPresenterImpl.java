@@ -1,21 +1,23 @@
 package com.example.biteright.search.presenter.categories;
 
-import com.example.biteright.home.model.randommeal.RandomMealRepository;
-import com.example.biteright.home.presenter.randommeal.RandomMealPresenter;
-import com.example.biteright.home.view.randommeal.RandomMealView;
-import com.example.biteright.model.Category;
-import com.example.biteright.model.Meal;
-import com.example.biteright.network.CategoriesNetworkCallback;
-import com.example.biteright.network.NetworkCallback;
-import com.example.biteright.search.model.categories.CategoriesRepository;
+import android.util.Log;
+
+import com.example.biteright.data.models.POJO.Category;
+import com.example.biteright.data.repo.MealRepository;
 import com.example.biteright.search.view.categories.CategoriesView;
 
-public class CategoriesPresenterImpl implements CategoriesPresenter, CategoriesNetworkCallback {
+import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
+public class CategoriesPresenterImpl implements CategoriesPresenter /*, CategoriesNetworkCallback*/ {
 
     private CategoriesView _view;
-    private CategoriesRepository _repo;
+    private MealRepository _repo;
 
-    public CategoriesPresenterImpl(CategoriesView view, CategoriesRepository repo){
+    public CategoriesPresenterImpl(CategoriesView view, MealRepository repo){
         _view =view;
         _repo = repo;
     }
@@ -23,17 +25,32 @@ public class CategoriesPresenterImpl implements CategoriesPresenter, CategoriesN
 
     @Override
     public void getCategories() {
-        _repo.getCategories(this);
+        Single<List<Category>> categories_observable = _repo.getCategoryMeals();
+        categories_observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        categories -> {
+                            Log.i("TAG", "onResponse: " + categories.size());
+                            _view.showCategories(categories);
+
+                        },
+                        error -> {
+                            Log.i("TAG", "onFailure: " + error.getMessage());
+                            _view.showErrMsg(error.getMessage());
+                        }
+                );
+
     }
 
 
-    @Override
-    public void OnSuccessResult(Category[] categories) {
-        _view.showCategories(categories);
-    }
-
-    @Override
-    public void OnFailureResult(String errorMsg) {
-        _view.showErrMsg(errorMsg);
-    }
+//    @Override
+//    public void OnSuccessResult(List<Category> categories) {
+//        _view.showCategories(categories);
+//    }
+//
+//    @Override
+//    public void OnFailureResult(String errorMsg) {
+//        _view.showErrMsg(errorMsg);
+//    }
 }

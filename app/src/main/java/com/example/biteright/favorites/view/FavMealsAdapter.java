@@ -57,8 +57,8 @@ public class FavMealsAdapter extends RecyclerView.Adapter<FavMealsAdapter.ViewHo
         holder.favMeal_area.setText(meals.get(position).getStrArea());
         Glide.with(context).load(meals.get(position).getStrMealThumb())
                 .apply(new RequestOptions()
-                        .placeholder(R.drawable.ic_launcher_background)
-                        .error(R.drawable.ic_launcher_foreground))
+                        .placeholder(R.drawable.dummy_food)
+                        .error(R.drawable.error_food))
                 .into(holder.favMeal_image);
 
 

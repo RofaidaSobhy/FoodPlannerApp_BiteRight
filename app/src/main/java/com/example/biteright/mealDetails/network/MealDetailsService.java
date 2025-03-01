@@ -1,6 +1,6 @@
 package com.example.biteright.mealDetails.network;
 
-import com.example.biteright.model.Root;
+import com.example.biteright.data.models.POJO.Root;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -2,8 +2,7 @@ package com.example.biteright.home.network.suggestedmeals;
 
 import android.util.Log;
 
-import com.example.biteright.home.network.randommeal.RandomMealService;
-import com.example.biteright.model.Root;
+import com.example.biteright.data.models.POJO.Root;
 import com.example.biteright.network.NetworkCallback;
 
 import retrofit2.Call;
