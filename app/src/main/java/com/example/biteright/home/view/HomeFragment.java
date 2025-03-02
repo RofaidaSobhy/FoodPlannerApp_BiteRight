@@ -10,8 +10,6 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +29,7 @@ import com.example.biteright.home.view.randommeal.RandomMealView;
 import com.example.biteright.model.Meal;
 import com.example.biteright.home.model.randommeal.RandomMealRepositoryImpl;
 import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSourceImpl;
+import com.example.biteright.utilits.NetworkChecker;
 
 public class HomeFragment extends Fragment implements RandomMealView {
 
@@ -46,6 +45,7 @@ public class HomeFragment extends Fragment implements RandomMealView {
     private String randomMealID;
     private ConstraintLayout constraintLayout_Network;
     private ConstraintLayout constrain_NetWorkExest;
+    private NetworkChecker networkChecker;
 
 
 
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment implements RandomMealView {
         super.onCreate(savedInstanceState);
 
 
-
+        networkChecker=new NetworkChecker(getContext());
         randomMealPresenter = new RandomMealPresenterImpl(this,
                 RandomMealRepositoryImpl.getInstance(
                         RandomMealRemoteDataSourceImpl.getInstance()
@@ -148,13 +148,21 @@ public class HomeFragment extends Fragment implements RandomMealView {
 
     @Override
     public void showErrMsg(String error) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(error).setTitle("An Error Occurred");
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        checkConnection();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//        builder.setMessage(error).setTitle("An Error Occurred");
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
     }
 
-
+    public void checkConnection(){
+        if(networkChecker.isConnected()){
+            constrain_NetWorkExest.setVisibility(View.VISIBLE);
+            constraintLayout_Network.setVisibility(View.GONE);
+        }else{
+            constrain_NetWorkExest.setVisibility(View.GONE);
+            constraintLayout_Network.setVisibility(View.VISIBLE);
+        }
+    }
 
 }
