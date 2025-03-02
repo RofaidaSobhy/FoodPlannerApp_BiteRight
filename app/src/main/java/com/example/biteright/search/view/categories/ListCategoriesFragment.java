@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.biteright.R;
 import com.example.biteright.data.local.db.MealLocalDataSourceImpl;
@@ -96,7 +95,6 @@ public class ListCategoriesFragment extends Fragment implements OnCategoryClickL
     @Override
     public void showCategories(List<Category> categories) {
         Log.i("TAG", "showCategories: "+categories.get(0).getStrCategory());
-        Toast.makeText(getContext(),categories.size()+"",Toast.LENGTH_LONG).show();
         categoriesAdapter.setCategories(categories);
         categoriesAdapter.notifyDataSetChanged();
         this.categories=categories;

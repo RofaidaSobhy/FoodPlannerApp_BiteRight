@@ -1,5 +1,7 @@
 package com.example.biteright.splash.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -17,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.biteright.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class SplashFragment extends Fragment {
@@ -86,7 +90,15 @@ public class SplashFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_welcomeFragment);
+                //FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                SharedPreferences sharedPreferences= getContext().getSharedPreferences("user_info", Context.MODE_PRIVATE);
+                String currentUser=sharedPreferences.getString("email",null);
+                if(currentUser == null) {
+                    Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_loginFragment);
+                }else{
+                    Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_homeFragment2);
+
+                }
             }
         },6000);
     }

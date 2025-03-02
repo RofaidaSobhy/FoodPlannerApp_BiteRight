@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.biteright.home.model.suggestedmeals.SuggestedMealsRepositoryImpl;
 import com.example.biteright.home.network.suggestedmeals.SuggestedMealsRemoteDataSourceImpl;
@@ -86,7 +85,6 @@ public class MealsFragment extends Fragment implements SuggestedMealsView, OnMea
     @Override
     public void showSuggestedMeals(Meal[] meals) {
         Log.i("TAG", "showSuggestedMeals: "+meals[0].getStrArea());
-        Toast.makeText(getContext(),meals.length+"",Toast.LENGTH_LONG).show();
 
         suggestedMealsAdapter.setList(meals);
         suggestedMealsAdapter.notifyDataSetChanged();

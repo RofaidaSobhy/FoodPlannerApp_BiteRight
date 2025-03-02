@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.view.RegistrationFragment"
+    tools:context=".authentication.view.registration.RegistrationFragment"
     android:background="@color/WhiteBeige">
     <ImageView
         android:id="@+id/imageView_Registration"

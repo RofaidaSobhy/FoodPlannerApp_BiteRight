@@ -64,10 +64,11 @@ public class MainActivity extends AppCompatActivity {
                 //bottomNavigationView
                 if(navDestination.getId()==R.id.homeFragment
                         || navDestination.getId()==R.id.searchFragment
-                        || navDestination.getId()==R.id.searchByMealFragment
                         || navDestination.getId()==R.id.favouriteFragment
                         || navDestination.getId()==R.id.planFragment
-                        || navDestination.getId()==R.id.profileFragment)
+                        || navDestination.getId()==R.id.profileFragment
+                        || navDestination.getId()==R.id.recipeFragment
+                )
                 {
                     bottomNavigationView.setVisibility(View.VISIBLE);
                 }else {

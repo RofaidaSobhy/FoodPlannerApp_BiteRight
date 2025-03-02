@@ -1,11 +1,13 @@
 package com.example.biteright.home.view;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,21 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.biteright.R;
-import com.example.biteright.home.model.suggestedmeals.SuggestedMealsRepositoryImpl;
-import com.example.biteright.home.network.suggestedmeals.SuggestedMealsRemoteDataSourceImpl;
 import com.example.biteright.home.presenter.randommeal.RandomMealPresenter;
 import com.example.biteright.home.presenter.randommeal.RandomMealPresenterImpl;
-import com.example.biteright.home.presenter.suggestedmeals.SuggestedMealsPresenter;
-import com.example.biteright.home.presenter.suggestedmeals.SuggestedMealsPresenterImpl;
+
 import com.example.biteright.home.view.randommeal.RandomMealView;
-import com.example.biteright.home.view.suggestedmeals.OnMealClickListener;
-import com.example.biteright.home.view.suggestedmeals.SuggestedMealsAdapter;
-import com.example.biteright.home.view.suggestedmeals.SuggestedMealsView;
+
 import com.example.biteright.model.Meal;
 import com.example.biteright.home.model.randommeal.RandomMealRepositoryImpl;
 import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSourceImpl;
@@ -48,7 +44,8 @@ public class HomeFragment extends Fragment implements RandomMealView {
     private CardView cardView_randomMeal;
 
     private String randomMealID;
-
+    private ConstraintLayout constraintLayout_Network;
+    private ConstraintLayout constrain_NetWorkExest;
 
 
 
@@ -68,13 +65,15 @@ public class HomeFragment extends Fragment implements RandomMealView {
 
 
 
-
         randomMealPresenter = new RandomMealPresenterImpl(this,
                 RandomMealRepositoryImpl.getInstance(
                         RandomMealRemoteDataSourceImpl.getInstance()
+
                 ));
 
-        randomMealPresenter.getRandomMeal();
+            randomMealPresenter.getRandomMeal();
+
+
 
 
 
@@ -107,6 +106,8 @@ public class HomeFragment extends Fragment implements RandomMealView {
         randomMeal_description = view.findViewById(R.id.randomMeal_description);
         randomMeal_area = view.findViewById(R.id.randomMeal_area);
         cardView_randomMeal = view.findViewById(R.id.cardView_randomMeal);
+        constraintLayout_Network=view.findViewById(R.id.constrain_Network);
+        constrain_NetWorkExest=view.findViewById(R.id.constrain_NetWorkExest);
 
 
     }
@@ -128,7 +129,6 @@ public class HomeFragment extends Fragment implements RandomMealView {
     @Override
     public void showRandomMeal(Meal[] meals) {
         Log.i("TAG", "showRandomMeal: "+meals[0].getStrArea());
-        Toast.makeText(getContext(),meals[0].getIdMeal(),Toast.LENGTH_LONG).show();
 
         Glide.with(this).load(meals[0].getStrMealThumb())
                 .apply(new RequestOptions()
@@ -148,10 +148,13 @@ public class HomeFragment extends Fragment implements RandomMealView {
 
     @Override
     public void showErrMsg(String error) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(error).setTitle("An Error Occurred");
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
 
 }

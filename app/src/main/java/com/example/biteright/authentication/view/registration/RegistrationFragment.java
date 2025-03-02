@@ -1,11 +1,6 @@
-package com.example.biteright.authentication.view;
+package com.example.biteright.authentication.view.registration;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.biteright.R;
-import com.example.biteright.authentication.model.RegistrationRepositoryImpl;
-import com.example.biteright.authentication.presenter.RegistrationPresenter;
-import com.example.biteright.authentication.presenter.RegistrationPresenterImpl;
-import com.example.biteright.data.remote.authentication.FirebaseRemoteDataSource;
+import com.example.biteright.authentication.model.registration.RegistrationRepositoryImpl;
+import com.example.biteright.authentication.presenter.registeration.RegistrationPresenter;
+import com.example.biteright.authentication.presenter.registeration.RegistrationPresenterImpl;
 import com.example.biteright.data.remote.authentication.FirebaseRemoteDataSourceImpl;
-import com.example.biteright.home.model.randommeal.RandomMealRepositoryImpl;
-import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSourceImpl;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
@@ -115,7 +102,7 @@ public class RegistrationFragment extends Fragment implements RegistrationView {
 
         skip.setOnClickListener(
                 v -> {
-                    Navigation.findNavController(view).navigate(R.id.action_registrationFragment_to_homeFragment);
+                    Navigation.findNavController(view).navigate(R.id.action_registrationFragment_to_loginFragment);
 
                 }
         );
@@ -179,7 +166,7 @@ public class RegistrationFragment extends Fragment implements RegistrationView {
 
     @Override
     public void onRegistrationSuccess(FirebaseUser user) {
-        Toast.makeText(getContext(),"Succesfully create account, Check email to verify", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(),"Succesfully create account, Check email to verify", Toast.LENGTH_SHORT).show();
         user.sendEmailVerification();
 
         //Navigation.findNavController(_v).navigate(R.id.action_registrationFragment_to_homeFragment);
@@ -200,7 +187,7 @@ public class RegistrationFragment extends Fragment implements RegistrationView {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Navigation.findNavController(_v).navigate(R.id.action_registrationFragment_to_homeFragment);
+                        Navigation.findNavController(_v).navigate(R.id.action_registrationFragment_to_loginFragment);
                         clearFields();
 
                     }

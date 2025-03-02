@@ -1,4 +1,4 @@
-package com.example.biteright.authentication.model;
+package com.example.biteright.authentication.model.registration;
 
 import com.example.biteright.data.remote.authentication.FirebaseRemoteDataSource;
 import com.google.firebase.auth.FirebaseUser;
@@ -6,7 +6,7 @@ import com.google.firebase.auth.FirebaseUser;
 import io.reactivex.rxjava3.core.Single;
 
 
-public class RegistrationRepositoryImpl implements RegistrationRepository{
+public class RegistrationRepositoryImpl implements RegistrationRepository {
 
     FirebaseRemoteDataSource firebaseRemoteDataSource;
     private static RegistrationRepositoryImpl repo=null;

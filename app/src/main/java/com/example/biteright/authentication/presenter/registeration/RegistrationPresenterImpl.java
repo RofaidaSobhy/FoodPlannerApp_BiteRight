@@ -1,9 +1,9 @@
-package com.example.biteright.authentication.presenter;
+package com.example.biteright.authentication.presenter.registeration;
 
 import android.util.Patterns;
 
-import com.example.biteright.authentication.model.RegistrationRepository;
-import com.example.biteright.authentication.view.RegistrationView;
+import com.example.biteright.authentication.model.registration.RegistrationRepository;
+import com.example.biteright.authentication.view.registration.RegistrationView;
 import com.google.firebase.auth.FirebaseUser;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class RegistrationPresenterImpl implements RegistrationPresenter{
+public class RegistrationPresenterImpl implements RegistrationPresenter {
 
     private RegistrationView _view;
     private RegistrationRepository _repo;

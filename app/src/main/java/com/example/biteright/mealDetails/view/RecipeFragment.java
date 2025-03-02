@@ -22,7 +22,6 @@ import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -210,7 +209,6 @@ public class RecipeFragment extends Fragment implements MealDetailsView {
     public void showMealDetails(Meal[] meals) {
 
         Log.i("TAG", "showMealDetails: "+meals[0].getStrArea());
-        Toast.makeText(getContext(),meals[0].getStrMeal(),Toast.LENGTH_LONG).show();
 
         this.meal=meals[0];
 

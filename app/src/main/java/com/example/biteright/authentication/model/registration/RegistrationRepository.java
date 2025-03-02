@@ -1,4 +1,4 @@
-package com.example.biteright.authentication.model;
+package com.example.biteright.authentication.model.registration;
 
 import com.google.firebase.auth.FirebaseUser;
 

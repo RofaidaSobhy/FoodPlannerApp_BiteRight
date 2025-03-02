@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/text_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -43,10 +43,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toBottomOf="@+id/text_email" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -55,35 +55,33 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        android:drawableStart="@drawable/ic_favorite"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="@color/RedPinkMain"/>
+        android:backgroundTint="@color/RedPinkMain"
+        />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_plan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/PlannedMeals"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        android:drawableStart="@drawable/ic_calendar"
-        android:background="@drawable/rounded_button"/>
+        app:layout_constraintEnd_toEndOf="@+id/btn_fav"
+        app:layout_constraintStart_toStartOf="@+id/btn_fav"
+        app:layout_constraintTop_toBottomOf="@+id/btn_fav"
+        android:backgroundTint="@color/RedPinkMain"/>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/Logout"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        android:background="@drawable/rounded_button"/>
+        app:layout_constraintEnd_toEndOf="@+id/btn_plan"
+        app:layout_constraintStart_toStartOf="@+id/btn_plan"
+        app:layout_constraintTop_toBottomOf="@+id/btn_plan"
+        android:backgroundTint="@color/RedPinkMain"/>
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btn_back_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -91,5 +89,6 @@
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/WhiteBeige"/>
+        android:background="@color/WhiteBeige"
+        android:padding="20dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
