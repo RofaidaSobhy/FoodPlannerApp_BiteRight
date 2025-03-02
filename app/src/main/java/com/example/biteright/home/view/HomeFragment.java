@@ -1,13 +1,12 @@
 package com.example.biteright.home.view;
 
-import android.opengl.Visibility;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -43,8 +42,8 @@ public class HomeFragment extends Fragment implements RandomMealView {
     private CardView cardView_randomMeal;
 
     private String randomMealID;
-    private ConstraintLayout constraintLayout_Network;
-    private ConstraintLayout constrain_NetWorkExest;
+    private ConstraintLayout NetworkOff;
+    private Group NetworkON;
     private NetworkChecker networkChecker;
 
 
@@ -93,7 +92,7 @@ public class HomeFragment extends Fragment implements RandomMealView {
         initUI(view);
         onClick();
 
-
+        checkConnection();
 
 
     }
@@ -106,8 +105,8 @@ public class HomeFragment extends Fragment implements RandomMealView {
         randomMeal_description = view.findViewById(R.id.randomMeal_description);
         randomMeal_area = view.findViewById(R.id.randomMeal_area);
         cardView_randomMeal = view.findViewById(R.id.cardView_randomMeal);
-        constraintLayout_Network=view.findViewById(R.id.constrain_Network);
-        constrain_NetWorkExest=view.findViewById(R.id.constrain_NetWorkExest);
+        NetworkOff=view.findViewById(R.id.NetworkOff);
+        NetworkON= view.findViewById(R.id.NetworkON);
 
 
     }
@@ -157,11 +156,11 @@ public class HomeFragment extends Fragment implements RandomMealView {
 
     public void checkConnection(){
         if(networkChecker.isConnected()){
-            constrain_NetWorkExest.setVisibility(View.VISIBLE);
-            constraintLayout_Network.setVisibility(View.GONE);
+            NetworkON.setVisibility(View.VISIBLE);
+            NetworkOff.setVisibility(View.GONE);
         }else{
-            constrain_NetWorkExest.setVisibility(View.GONE);
-            constraintLayout_Network.setVisibility(View.VISIBLE);
+            NetworkON.setVisibility(View.GONE);
+            NetworkOff.setVisibility(View.VISIBLE);
         }
     }
 
