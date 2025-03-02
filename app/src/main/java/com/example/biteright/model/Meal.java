@@ -1,7 +1,16 @@
 package com.example.biteright.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "favmeal")
 public class Meal{
+
+    @PrimaryKey
+    @NonNull
     public String idMeal;
+    public String userName;
     public String strMeal;
     public String strCategory;
     public String strArea;
@@ -49,9 +58,17 @@ public class Meal{
     public String strMeasure19;
     public String strMeasure20;
 
+    public String getUserName() {
+        return userName;
+    }
 
-    public Meal(String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20) {
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Meal(@NonNull String idMeal, String userName, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20) {
         this.idMeal = idMeal;
+        this.userName = userName;
         this.strMeal = strMeal;
         this.strCategory = strCategory;
         this.strArea = strArea;
@@ -476,5 +493,58 @@ public class Meal{
         this.strMeasure20 = strMeasure20;
     }
 
+
+    public String getIngredient(int index) {
+        switch (index) {
+            case 1: return getStrIngredient1();
+            case 2: return getStrIngredient2();
+            case 3: return getStrIngredient3();
+            case 4: return getStrIngredient4();
+            case 5: return getStrIngredient5();
+            case 6: return getStrIngredient6();
+            case 7: return getStrIngredient7();
+            case 8: return getStrIngredient8();
+            case 9: return getStrIngredient9();
+            case 10: return getStrIngredient10();
+            case 11: return getStrIngredient11();
+            case 12: return getStrIngredient12();
+            case 13: return getStrIngredient13();
+            case 14: return getStrIngredient14();
+            case 15: return getStrIngredient15();
+            case 16: return getStrIngredient16();
+            case 17: return getStrIngredient17();
+            case 18: return getStrIngredient18();
+            case 19: return getStrIngredient19();
+            case 20: return getStrIngredient20();
+
+            default: return "";
+        }
+    }
+
+    public String getMeasure(int index) {
+        switch (index) {
+            case 1: return getStrMeasure1();
+            case 2: return getStrMeasure2();
+            case 3: return getStrMeasure3();
+            case 4: return getStrMeasure4();
+            case 5: return getStrMeasure5();
+            case 6: return getStrMeasure6();
+            case 7: return getStrMeasure7();
+            case 8: return getStrMeasure8();
+            case 9: return getStrMeasure9();
+            case 10: return getStrMeasure10();
+            case 11: return getStrMeasure11();
+            case 12: return getStrMeasure12();
+            case 13: return getStrMeasure13();
+            case 14: return getStrMeasure14();
+            case 15: return getStrMeasure15();
+            case 16: return getStrMeasure16();
+            case 17: return getStrMeasure17();
+            case 18: return getStrMeasure18();
+            case 19: return getStrMeasure19();
+            case 20: return getStrMeasure20();
+            default: return "";
+        }
+    }
 
 }

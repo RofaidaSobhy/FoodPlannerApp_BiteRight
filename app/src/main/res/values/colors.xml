@@ -8,6 +8,7 @@
     <color name="Pink">#FFC6C9</color>
     <color name="WhiteBeige">#FFFDF9</color>
     <color name="BackgroundDarkMode">#1C0F0D</color>
+    <color name="gray">#CBD5E1</color>
 <!--    <color name="Degraded">#FFFFFFFF</color>-->
 <!--    <color name="ColorDark">#FFFFFFFF</color>-->
 </resources>

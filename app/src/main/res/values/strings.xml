@@ -2,4 +2,34 @@
     <string name="app_name">BiteRight</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="SuggestedMeal">Suggested Meal</string>
+    <string name="ThreeDots">" ..."</string>
+    <string name="slogan"><![CDATA[" Plan your bites the right way"]]></string>
+    <string name="EmailAddress">Email Address</string>
+    <string name="Password">Password</string>
+    <string name="SignIn">Sign In</string>
+    <string name="doNotHaveAnAccount">Don\'t have an account?</string>
+    <string name="SignUp">Sign Up</string>
+    <string name="OR">OR</string>
+    <string name="SignInWithGoogle">Sign In With Google</string>
+    <string name="AlreadyHaveAnAccount">Already have an account?</string>
+    <string name="SignUpWithGoogle">Sign Up With Google</string>
+    <string name="ConfirmPassword">Confirm Password</string>
+    <string name="Confirm_Password">Confirm Password</string>
+    <string name="Email">Email</string>
+    <string name="Skip">Skip</string>
+    <string name="AHappyBite">A Happy Bite</string>
+    <string name="Hi">Hi!</string>
+    <string name="Ingredients">Ingredients</string>
+    <string name="Instructions">Instructions</string>
+    <string name="Video">Video</string>
+    <string name="Recipe">Recipe</string>
+    <string name="category">Category</string>
+    <string name="country">Country</string>
+    <string name="Hello">Hello, my chef</string>
+    <string name="FavoriteMeals">Favorite Meals</string>
+    <string name="PlannedMeals">Planned Meals</string>
+    <string name="Logout">Logout</string>
+    <string name="set_the_date">Set the Date</string>
+    <string name="NoInternet">Network Issue!</string>
 </resources>

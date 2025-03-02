@@ -1,41 +1,60 @@
 package com.example.biteright.home.view;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.biteright.R;
-import com.example.biteright.home.presenter.RandomMealPresenter;
-import com.example.biteright.home.presenter.RandomMealPresenterImpl;
+import com.example.biteright.home.presenter.randommeal.RandomMealPresenter;
+import com.example.biteright.home.presenter.randommeal.RandomMealPresenterImpl;
+
+import com.example.biteright.home.view.randommeal.RandomMealView;
+
 import com.example.biteright.model.Meal;
-import com.example.biteright.model.MealsRepositoryImpl;
-import com.example.biteright.network.RandomMealRemoteDataSourceImpl;
+import com.example.biteright.home.model.randommeal.RandomMealRepositoryImpl;
+import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSourceImpl;
 
 public class HomeFragment extends Fragment implements RandomMealView {
 
 
-    private TextView txt_from_home_to_plan;
-    private TextView txt_from_home_to_favourite;
-    private TextView txt_from_home_to_profile;
-    private TextView txt_from_home_to_search;
-    private TextView txt_from_home_to_notification;
 
-    RandomMealPresenter randomMealPresenter;
+
+    private ImageView randomMeal_image;
+    private TextView randomMeal_name;
+    private TextView randomMeal_description;
+    private TextView randomMeal_area;
+    private CardView cardView_randomMeal;
+
+    private String randomMealID;
+    private ConstraintLayout constraintLayout_Network;
+    private ConstraintLayout constrain_NetWorkExest;
+
+
+
+    private RandomMealPresenter randomMealPresenter;
+
 
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -43,10 +62,20 @@ public class HomeFragment extends Fragment implements RandomMealView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        randomMealPresenter = new RandomMealPresenterImpl(this,
-                MealsRepositoryImpl.getInstance(RandomMealRemoteDataSourceImpl.getInstance()));
 
-        randomMealPresenter.getRandomMeal();
+
+
+        randomMealPresenter = new RandomMealPresenterImpl(this,
+                RandomMealRepositoryImpl.getInstance(
+                        RandomMealRemoteDataSourceImpl.getInstance()
+
+                ));
+
+            randomMealPresenter.getRandomMeal();
+
+
+
+
 
     }
 
@@ -62,51 +91,70 @@ public class HomeFragment extends Fragment implements RandomMealView {
         super.onViewCreated(view, savedInstanceState);
 
         initUI(view);
-        onClickListener(view);
+        onClick();
+
+
+
 
     }
 
     private void initUI(View view){
-        txt_from_home_to_plan=view.findViewById(R.id.txt_from_home_to_plan);
-        txt_from_home_to_favourite=view.findViewById(R.id.txt_from_home_to_favourite);
-        txt_from_home_to_search=view.findViewById(R.id.txt_from_home_to_search);
-        txt_from_home_to_profile=view.findViewById(R.id.txt_from_home_to_profile);
-        txt_from_home_to_notification=view.findViewById(R.id.txt_from_home_to_notification);
+
+
+        randomMeal_image = view.findViewById(R.id.randomMeal_image);
+        randomMeal_name = view.findViewById(R.id.randomMeal_name);
+        randomMeal_description = view.findViewById(R.id.randomMeal_description);
+        randomMeal_area = view.findViewById(R.id.randomMeal_area);
+        cardView_randomMeal = view.findViewById(R.id.cardView_randomMeal);
+        constraintLayout_Network=view.findViewById(R.id.constrain_Network);
+        constrain_NetWorkExest=view.findViewById(R.id.constrain_NetWorkExest);
+
+
     }
 
-    private void onClickListener(View view){
-        txt_from_home_to_plan.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_planFragment)
-        );
-
-        txt_from_home_to_favourite.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_favouriteFragment)
-        );
-
-        txt_from_home_to_search.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_searchFragment)
-        );
-
-        txt_from_home_to_profile.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment)
-        );
-
-        txt_from_home_to_notification.setOnClickListener(
-                v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_notificationFragment)
+    private void onClick(){
+        cardView_randomMeal.setOnClickListener(
+                v -> {
+                    HomeFragmentDirections.ActionHomeFragmentToRecipeFragment2 action =
+                            HomeFragmentDirections.actionHomeFragmentToRecipeFragment2(randomMealID);
+                    Navigation.findNavController(v).navigate(action);
+                }
         );
     }
+
+
+
+
 
     @Override
     public void showRandomMeal(Meal[] meals) {
         Log.i("TAG", "showRandomMeal: "+meals[0].getStrArea());
-        Toast.makeText(getContext(),meals[0].getIdMeal(),Toast.LENGTH_LONG).show();
+
+        Glide.with(this).load(meals[0].getStrMealThumb())
+                .apply(new RequestOptions()
+                    .override(350, 150)
+                    .placeholder(R.drawable.dummy_food)
+                    .error(R.drawable.error_food)
+                    .centerCrop())
+                .into(randomMeal_image);
+
+        randomMeal_name.setText(meals[0].getStrMeal());
+        randomMeal_area.setText(meals[0].getStrArea());
+        randomMeal_description.setText(meals[0].getStrInstructions().substring(0,meals[0].getStrInstructions().length()-1) );
+        randomMealID = meals[0].getIdMeal();
     }
+
+
 
     @Override
     public void showErrMsg(String error) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(error).setTitle("An Error Occurred");
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
+
 }
