@@ -50,6 +50,11 @@ public class MealRepositoryImpl implements MealRepository{
     }
 
     @Override
+    public Single<List<Meal>> getMeals(String firstLetters) {
+        return mealRemoteDataSource.getMeals(firstLetters);
+    }
+
+    @Override
     public Observable<List<Meal>> getStoredMeals(){
         return mealLocalDataSource.getMeals();
     }
