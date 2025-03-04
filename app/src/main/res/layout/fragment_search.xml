@@ -58,6 +58,24 @@
             android:text="@string/country" />
     </com.google.android.material.chip.ChipGroup>
 
+    <TextView
+        android:id="@+id/typeOfSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/RedPinkMain"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="TypeOfSearch" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/chipsFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="searchFragmentContainerView" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/searchFragmentContainerView"
         android:layout_width="0dp"
@@ -72,15 +90,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
-    <TextView
-        android:id="@+id/typeOfSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/RedPinkMain"
-        android:textSize="24sp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_Seach"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="TypeOfSearch" />
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 </androidx.constraintlayout.widget.ConstraintLayout>

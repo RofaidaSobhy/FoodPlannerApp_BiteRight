@@ -16,6 +16,8 @@ public interface MealRepository {
     Single<List<Category>> getCategoryMeals();
     Single<List<Area>> getAreaMeals();
     Single<List<Ingredient>> getIngredientMeals();
+    Single<List<Meal>> getMeals(String firstLetters);
+
 
 
     Observable<List<Meal>> getStoredMeals();

@@ -1,17 +1,14 @@
 package com.example.biteright.home.view;
 
-import android.opengl.Visibility;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +28,7 @@ import com.example.biteright.home.view.randommeal.RandomMealView;
 import com.example.biteright.model.Meal;
 import com.example.biteright.home.model.randommeal.RandomMealRepositoryImpl;
 import com.example.biteright.home.network.randommeal.RandomMealRemoteDataSourceImpl;
+import com.example.biteright.utilits.NetworkChecker;
 
 public class HomeFragment extends Fragment implements RandomMealView {
 
@@ -44,8 +42,9 @@ public class HomeFragment extends Fragment implements RandomMealView {
     private CardView cardView_randomMeal;
 
     private String randomMealID;
-    private ConstraintLayout constraintLayout_Network;
-    private ConstraintLayout constrain_NetWorkExest;
+    private ConstraintLayout NetworkOff;
+    private Group NetworkON;
+    private NetworkChecker networkChecker;
 
 
 
@@ -64,7 +63,7 @@ public class HomeFragment extends Fragment implements RandomMealView {
         super.onCreate(savedInstanceState);
 
 
-
+        networkChecker=new NetworkChecker(getContext());
         randomMealPresenter = new RandomMealPresenterImpl(this,
                 RandomMealRepositoryImpl.getInstance(
                         RandomMealRemoteDataSourceImpl.getInstance()
@@ -93,7 +92,7 @@ public class HomeFragment extends Fragment implements RandomMealView {
         initUI(view);
         onClick();
 
-
+        checkConnection();
 
 
     }
@@ -106,8 +105,8 @@ public class HomeFragment extends Fragment implements RandomMealView {
         randomMeal_description = view.findViewById(R.id.randomMeal_description);
         randomMeal_area = view.findViewById(R.id.randomMeal_area);
         cardView_randomMeal = view.findViewById(R.id.cardView_randomMeal);
-        constraintLayout_Network=view.findViewById(R.id.constrain_Network);
-        constrain_NetWorkExest=view.findViewById(R.id.constrain_NetWorkExest);
+        NetworkOff=view.findViewById(R.id.NetworkOff);
+        NetworkON= view.findViewById(R.id.NetworkON);
 
 
     }
@@ -148,13 +147,21 @@ public class HomeFragment extends Fragment implements RandomMealView {
 
     @Override
     public void showErrMsg(String error) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(error).setTitle("An Error Occurred");
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        checkConnection();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//        builder.setMessage(error).setTitle("An Error Occurred");
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
     }
 
-
+    public void checkConnection(){
+        if(networkChecker.isConnected()){
+            NetworkON.setVisibility(View.VISIBLE);
+            NetworkOff.setVisibility(View.GONE);
+        }else{
+            NetworkON.setVisibility(View.GONE);
+            NetworkOff.setVisibility(View.VISIBLE);
+        }
+    }
 
 }

@@ -3,6 +3,7 @@ package com.example.biteright.data.network;
 import com.example.biteright.data.models.POJO.Area;
 import com.example.biteright.data.models.POJO.Category;
 import com.example.biteright.data.models.POJO.Ingredient;
+import com.example.biteright.model.Meal;
 
 import java.util.List;
 
@@ -54,5 +55,11 @@ public class MealRemoteDataSourceImp implements MealRemoteDataSource{
         return mealService.getIngredients()
                 .map(ingredientResponse -> ingredientResponse.getMeals()
                 );
+    }
+
+    @Override
+    public Single<List<Meal>> getMeals(String firstLetters) {
+        return mealService.getMeals(firstLetters)
+                .map(mealResponse -> mealResponse.getMeals());
     }
 }

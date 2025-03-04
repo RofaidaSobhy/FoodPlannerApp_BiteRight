@@ -1,52 +1,38 @@
-//package com.example.biteright.search.presenter;
-//
-//
-//import com.example.biteright.data.repo.MealRepository;
-//import com.example.biteright.search.view.categories.CategoriesView;
-//import io.reactivex.rxjava3.core.Observable;
-//import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-//import io.reactivex.rxjava3.schedulers.Schedulers;
-//import io.reactivex.rxjava3.subjects.PublishSubject;
-//import io.reactivex.rxjava3.disposables.CompositeDisposable;
-//import java.util.List;
-//import java.util.concurrent.TimeUnit;
-//
-//public class SearchPresenterImpl implements SearchPresenter {
-//
-//    private CategoriesView categoriesView;
-//    private MealRepository mealRepository;
-//    private CompositeDisposable disposables;
-//    private PublishSubject<String> searchSubject;
-//
-//    public SearchPresenterImpl(CategoriesView categoriesView, MealRepository mealRepository) {
-//        this.categoriesView = categoriesView;
-//        this.mealRepository = mealRepository;
-//        this.disposables = new CompositeDisposable();
-//        this.searchSubject = PublishSubject.create();
-//    }
-//
-//    @Override
-//    public void onSearchQueryChanged(String query) {
-//        searchSubject.onNext(query);
-//    }
-//
-//    @Override
-//    public void getCategories() {
-//        disposables.add(
-//                searchSubject
-//                        .debounce(300, TimeUnit.MILLISECONDS)
-//                        .distinctUntilChanged()
-//                        .flatMap(query -> mealRepository.getCategories(query))
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(
-//                                categories -> categoriesView.showCategories(categories),
-//                                throwable -> categoriesView.showErrMsg(throwable.getMessage())
-//                        )
-//        );
-//    }
-//
-//    public void clear() {
-//        disposables.clear();
-//    }
-//}
+package com.example.biteright.search.presenter;
+
+import com.example.biteright.data.repo.MealRepository;
+import com.example.biteright.search.view.SearchingView;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
+public class SearchPresenterImpl implements SearchPresenter{
+
+    private SearchingView _view;
+    private MealRepository _repo;
+
+    public SearchPresenterImpl(SearchingView _view, MealRepository _repo) {
+        this._view = _view;
+        this._repo = _repo;
+    }
+
+
+    @Override
+    public void onSearchQueryChanged(String query) {
+        if(query.trim().isEmpty()){
+            return;
+        }
+        _repo.getMeals(query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result ->{
+                        if(result !=null && !result.isEmpty()){
+                            _view.showData(result);
+                        }else {
+                            _view.showErrMsg("No meals had founded.");
+                        }
+                    }, error ->{
+                        _view.showErrMsg(error.getLocalizedMessage());
+                });
+    }
+}
